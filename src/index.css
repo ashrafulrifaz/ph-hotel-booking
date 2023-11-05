@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+  font-family: 'Inter', sans-serif;
+}
+
+#home #navbar {
+  position: absolute;
+  width: 100%;
+  color: white;
+  padding: 20px 0;
+  border: none
+}
+
+#home #navbar h2 {
+  color: white
+}
+
+#nav_item li .active {
+  color: #1D4ED8;
+  font-weight: 600
+}
+
+#rooms #hotel-map {
+  height: 250px
+}
