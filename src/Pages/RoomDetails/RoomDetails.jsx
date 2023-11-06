@@ -9,9 +9,9 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useContext, useEffect, useRef, useState } from "react";
 import check from '../../assets/badge-check.png'
-import AdditionalServices from "../../Components/RoomDetailsComponents/AdditionalServices/AdditionalServices";
+// import AdditionalServices from "../../Components/RoomDetailsComponents/AdditionalServices/AdditionalServices";
 import sizeImg from '../../assets/wide.png'
-import leftImg from '../../assets/less-than.png'
+// import leftImg from '../../assets/less-than.png'
 import { AuthContext } from "../../Provider/Provider";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -24,25 +24,25 @@ const RoomDetails = () => {
    const roomData = useLoaderData()
    const {_id, images, title, description, rating, facilities, price, room_number} = roomData
    const mapRef = useRef(null)
-   const today = new Date().toISOString().slice(0, 10)
-   const [checkInDate, setCheckInDate] = useState(new Date());
-   const [checkOutDate, setCheckOutDate] = useState(new Date());
    const tomorrowDate = new Date()
    tomorrowDate.setDate(new Date ().getDate() + 1)
-   const tomorrow = tomorrowDate.toISOString().slice(0, 10)
-   const [total, setTotal] = useState(price)
+   const [checkInDate, setCheckInDate] = useState(new Date());
+   const [checkOutDate, setCheckOutDate] = useState(tomorrowDate);
+
+   console.log(typeof checkInDate.toString());
+   // const [total, setTotal] = useState(price)
    const navigate = useNavigate()
 
    const [bookedDates, setBookedDates] = useState([])
    
    const offerPrice = Math.ceil(price - ((price / 100) * 20))
    const totalPrice = Math.ceil(price + ((price / 100) * 5))
-   const disabledDate = [
-      bookedDates.map(dates => {
-         new Date(`${dates.checkIn}`)
-      })
-   ]
-   console.log(disabledDate);
+   const disabledDates = [
+      new Date('2023-11-20'),
+      new Date('2023-11-25'),
+      new Date('2023-12-02'),
+      // Add more dates to this array as needed
+    ];
 
    useEffect( () => {
       axios.get(`http://localhost:5000/bookings/${room_number}`)
@@ -59,12 +59,9 @@ const RoomDetails = () => {
       }      
    },[room_number])
 
-   const handleReservation = e => {
-      e.preventDefault()
-      const form = e.target;
-      const rooms = form.rooms.value;
+   const handleNewBooking = () => {
       const bookedItem = {
-         image: images[0], title, email: user.email, checkIn: checkInDate, checkOut: checkOutDate, room_id: _id, price, rooms, room_number
+         image: images[0], title, email: user.email, checkIn: checkInDate, checkOut: checkOutDate, room_id: _id, price, room_number
       }
       axios.post("http://localhost:5000/bookings", bookedItem)
          .then(res => {
@@ -169,29 +166,21 @@ const RoomDetails = () => {
                <p className="inline rounded-3xl py-2 px-4 bg-blue-600 text-white text-sm font-medium">{}% off</p>
                <p className="text-lg font-medium mt-3 line-through decoration-2 decoration-red-600">${price} <span className="font-normal">/night</span></p>
                <p className="text-lg font-medium">${offerPrice} <span className="text-base">/night</span></p>
-               <p className="text-base font-medium">+ 5% Taxes</p>
-               <div className="flex gap-1 items-center mt-2">
-                  <img src={leftImg} className="w-7 mt-1.5" alt="" />
-                  <p className="mt-2 font-medium text-lg">{5} Rooms available</p>
-               </div>
+               <p className="text-base font-medium">Including 5% Taxes</p>
             </div>
-            <form onSubmit={handleReservation} className="space-y-3 py-5">
+            <div className="space-y-3 py-5">
                <div className="border-gray-300 border py-2 px-3 rounded-md flex gap-3 items-center">
                   <label htmlFor="check-in" className="font-medium text-lg">Check In:</label>
-                  <DatePicker excludeDates={[disabledDate]} selected={checkInDate} onChange={(date) => setCheckInDate(date)} className="focus:outline-none" />
+                  <DatePicker excludeDates={disabledDates} selected={checkInDate} onChange={(date) => setCheckInDate(date)} className="focus:outline-none" />
                </div>
                <div className="border-gray-300 border py-2 px-3 rounded-md flex gap-3 items-center">
                   <label htmlFor="check-out" className="font-medium text-lg">Check Out:</label>
-                  <DatePicker excludeDates={[disabledDate]} selected={checkOutDate} onChange={(date) => setCheckOutDate(date)} className="focus:outline-none" />
-               </div>
-               <div className="py-2 px-3 border-gray-300 border rounded-md grid grid-cols-2 gap-5">
-                  <label htmlFor="rooms">Number of Rooms</label>
-                  <input id="rooms" name="rooms" type="number" className="focus:outline-none border-s border-gray-500 px-5" defaultValue={1} />
+                  <DatePicker excludeDates={disabledDates} selected={checkOutDate} onChange={(date) => setCheckOutDate(date)} className="focus:outline-none" />
                </div>
                {/* additional services */}
                <h3 className="text-xl font-semibold">Additional Services</h3>
                  {
-                  <AdditionalServices total={total} setTotal={setTotal}></AdditionalServices>
+                  // <AdditionalServices total={total} setTotal={setTotal}></AdditionalServices>
                  }
                <div className="flex justify-between items-center">
                   <p className="text-lg font-medium">Total: ${totalPrice}</p>
@@ -206,17 +195,17 @@ const RoomDetails = () => {
                            <form method="dialog">
                               <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                            </form>
-                           <div className="space-y-3">
+                           <div className="space-y-2">
                               <h2 className="text-xl font-medium">{title}</h2>
-                              <h3 className="text-lg font-medium">Check In Date: <span className="font-normal">4-11-2023</span></h3>
-                              <h3 className="text-lg font-medium">Check Out Date: <span className="font-normal">4-11-2023</span></h3>
-                              <h3 className="text-lg font-medium">${total} <span className="text-base">total including taxes</span></h3>
-                              <button className='capitalize font-medium bg-blue-700 text-white text-[15px] py-2 px-5 rounded-md hover:scale-95 transition-all mt-2'>Confirm Booking</button>
+                              <h3 className="text-lg font-medium">Check In Date: <span className="font-normal">{checkInDate.toString().slice(0, 16)}</span></h3>
+                              <h3 className="text-lg font-medium">Check Out Date: <span className="font-normal">{checkInDate.toString().slice(0, 16)}</span></h3>
+                              <h3 className="text-lg font-medium">$200<span className="text-base"> including taxes</span></h3>
+                              <button onClick={handleNewBooking} className='capitalize font-medium bg-blue-700 text-white text-[15px] py-2 px-5 rounded-md hover:scale-95 transition-all mt-2'>Confirm Booking</button>
                            </div>
                         </div>
                      </dialog>
                </div>
-            </form>
+            </div>
          </div>
       </div>
    );
