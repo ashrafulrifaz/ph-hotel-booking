@@ -1,8 +1,16 @@
+import axios from "axios";
 import { Link } from "react-router-dom";
 
 
 const BookedItem = ({booking}) => {
    const {_id, image, title, checkIn, checkOut, price} = booking
+
+   const handleDeleteItem = (id) => {
+      axios.delete(`http://localhost:5000/bookings/${id}`)
+         .then(res => {
+            console.log(res.data);
+         })
+   }
 
    return (
       <li className="border-b border-gray-200 p-5">
@@ -26,10 +34,10 @@ const BookedItem = ({booking}) => {
                   </div>
                </div>
                <div className="grid gap-3">
-                  <Link to={`/${_id}`}>
+                  <Link to={`/room/${_id}`}>
                      <button className="border py-1 px-2 rounded-md border-green-500 hover:bg-green-500 hover:text-white transition font-medium">Update</button>
                   </Link>
-                  <button className="border py-1 px-2 rounded-md border-red-500 transition hover:text-white hover:bg-red-500 font-medium">Delete</button>
+                  <button onClick={() => handleDeleteItem(_id)} className="border py-1 px-2 rounded-md border-red-500 transition hover:text-white hover:bg-red-500 font-medium">Delete</button>
                </div>
             </div>
          </div>
