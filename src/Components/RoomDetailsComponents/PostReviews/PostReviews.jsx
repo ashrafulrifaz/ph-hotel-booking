@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useContext } from "react";
 import { AuthContext } from "../../../Provider/Provider";
 import axios from "axios";
@@ -5,14 +6,14 @@ import Swal from "sweetalert2";
 
 const PostReviews = ({bookedUserEmail, room_number}) => {
    const {user} = useContext(AuthContext)
-   console.log(user);
+   const time = new Date().toLocaleString().slice(0, 10)
 
    const handleNewReview = e => {
       e.preventDefault()
       const form = e.target;
       const rating = form.rating.value;
-      const review = form.review.value;
-      const reviewData = {authorName: user?.displayName, authorImage: user?.photoURL, rating, review, email: bookedUserEmail, room_number}
+      const review_text = form.review.value;
+      const reviewData = {authorName: user?.displayName, authorImage: user?.photoURL, rating, review_text, email: bookedUserEmail, room_number, time}
       
       if(user?.email === bookedUserEmail) {
          axios.post('http://localhost:5000/review', reviewData)
@@ -25,6 +26,7 @@ const PostReviews = ({bookedUserEmail, room_number}) => {
                      showConfirmButton: false,
                      timer: 1500
                   });
+                  form.reset()
                }
             })
       }
@@ -32,7 +34,7 @@ const PostReviews = ({bookedUserEmail, room_number}) => {
 
    return (
       <form onSubmit={handleNewReview}  className="py-8">
-         <h3 className="text-xl font-medium">Share your experience</h3>
+         <h3 className="text-xl font-semibold">Share your experience</h3>
          <div className="mt-3">
             <input type="text" name="rating" className="focus:outline-none border border-gray-300 rounded-md w-1/4 px-3 py-1" placeholder="Rating" />
          </div>
@@ -43,5 +45,10 @@ const PostReviews = ({bookedUserEmail, room_number}) => {
       </form>
    );
 };
+
+PostReviews.propTypes = {
+   bookedUserEmail: PropTypes.object,
+   room_number: PropTypes.object
+}
 
 export default PostReviews;

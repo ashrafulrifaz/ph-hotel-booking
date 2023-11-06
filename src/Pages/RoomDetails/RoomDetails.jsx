@@ -18,6 +18,7 @@ import Swal from "sweetalert2";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import PostReviews from "../../Components/RoomDetailsComponents/PostReviews/PostReviews";
+import ReviewsCard from "../../Components/RoomDetailsComponents/ReviewsCard/ReviewsCard";
 
 
 const RoomDetails = () => {
@@ -36,6 +37,9 @@ const RoomDetails = () => {
    let [bookedDates, setBookedDates] = useState([])
    const [bookedRoom, setBookedRoom] = useState(null)
    const remainingRoom = quantity - bookedRoom
+
+   // review
+   const [reviews, setReviews] = useState([])
    
    let totalPrice = price   
    const offerPrice = Math.ceil(price - ((price / 100) * discount))
@@ -58,6 +62,11 @@ const RoomDetails = () => {
 
             setBookedDates(newDates)
             res.data.map(mail => setBookedUserEmail(mail.email))
+         })
+
+      axios.get(`http://localhost:5000/review/${room_number}`)
+         .then(res => {
+            setReviews(res.data)
          })
 
       if(!mapRef.current){
@@ -152,6 +161,12 @@ const RoomDetails = () => {
                   bookedUserEmail === user?.email && <PostReviews bookedUserEmail={bookedUserEmail} room_number={room_number}></PostReviews>
                }
             </div> 
+            <div>
+               <h3 className="text-xl font-semibold">People{"'"}s Experiences</h3>
+               {
+                  reviews.map((review, idx) => <ReviewsCard key={idx} review={review}></ReviewsCard>)
+               }
+            </div>
          </div>
          <div className="space-y-3">
             <div className="flex items-center gap-2">

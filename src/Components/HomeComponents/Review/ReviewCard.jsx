@@ -4,7 +4,7 @@ import quote from '../../../assets/quote-right.png'
 
 
 const ReviewCard = ({data}) => {
-   const {authorName, authorImage, review, rating} = data
+   const {authorName, authorImage, review_text, rating} = data
 
    return (
       <div className="py-8 px-5 md:p-5 rounded-xl border text-left hover:shadow-xl transition-shadow relative">
@@ -39,7 +39,7 @@ const ReviewCard = ({data}) => {
             </div>
          </div>
          <hr className="my-3 w-3/4" />
-         <p className="text-slate-700">{review}</p>
+         <p className="text-slate-700">{review_text}</p>
       </div> 
    );
 };
