@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
@@ -59,5 +60,9 @@ const Provider = ({children}) => {
       </AuthContext.Provider>
    );
 };
+
+Provider.propTypes = {
+   children: PropTypes.object
+}
 
 export default Provider;

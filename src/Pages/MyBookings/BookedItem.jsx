@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import axios from "axios";
 import moment from "moment";
 import { Link } from "react-router-dom";
@@ -79,5 +80,9 @@ const BookedItem = ({booking}) => {
       </li>
    );
 };
+
+BookedItem.propTypes = {
+   booking: PropTypes.object
+}
 
 export default BookedItem;

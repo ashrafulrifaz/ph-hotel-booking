@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 
 
@@ -33,5 +34,9 @@ const RoomPageCard = ({room}) => {
       </div>
    );
 };
+
+RoomPageCard.propTypes = {
+   room: PropTypes.object
+}
 
 export default RoomPageCard;

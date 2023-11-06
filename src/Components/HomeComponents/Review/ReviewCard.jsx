@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Rating from "react-rating";
 import quote from '../../../assets/quote-right.png'
 
@@ -42,5 +43,9 @@ const ReviewCard = ({data}) => {
       </div> 
    );
 };
+
+ReviewCard.propTypes = {
+   data: PropTypes.object
+}
 
 export default ReviewCard;

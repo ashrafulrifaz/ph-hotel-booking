@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import cab from '../../../assets/cab.png'
 import dinner from '../../../assets/dinner.png'
@@ -36,5 +37,10 @@ const AdditionalServices = ({total, setTotal}) => {
       </div>
    );
 };
+
+AdditionalServices.propTypes = {
+   total: PropTypes.object,
+   setTotal: PropTypes.object,
+}
 
 export default AdditionalServices;

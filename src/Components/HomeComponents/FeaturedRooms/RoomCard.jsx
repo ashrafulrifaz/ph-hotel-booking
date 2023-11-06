@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Rating from "react-rating";
 import { Link } from "react-router-dom";
 
@@ -54,5 +55,9 @@ const RoomCard = ({room}) => {
       </div>
    );
 };
+
+RoomCard.propTypes = {
+   room: PropTypes.object
+}
 
 export default RoomCard;
