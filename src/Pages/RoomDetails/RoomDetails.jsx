@@ -17,10 +17,12 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
+import PostReviews from "../../Components/RoomDetailsComponents/PostReviews/PostReviews";
 
 
 const RoomDetails = () => {
    const {user} = useContext(AuthContext)
+   const [bookedUserEmail, setBookedUserEmail] = useState([])
    const roomData = useLoaderData()
    const {_id, images, title, description, rating, facilities, price, room_number, discount, quantity} = roomData
    const mapRef = useRef(null)
@@ -55,6 +57,7 @@ const RoomDetails = () => {
             const newDates = [...newCheckInDate, ...newCheckOutDate];
 
             setBookedDates(newDates)
+            res.data.map(mail => setBookedUserEmail(mail.email))
          })
 
       if(!mapRef.current){
@@ -93,7 +96,6 @@ const RoomDetails = () => {
          <div className="col-span-2">
             <div className="space-y-3">    
                <div>
-
                   <Swiper
                      spaceBetween={30}
                      autoplay={{
@@ -113,10 +115,8 @@ const RoomDetails = () => {
                               <img style={{height: '450px'}} className="w-full rounded-xl" src={data} alt="room" />
                            </SwiperSlide>
                            )
-                        }
-                     
+                        }                     
                   </Swiper>
-
                </div>           
                <h2 className="text-3xl font-semibold">{title}</h2>
                <p className="text-lg">{description}</p>
@@ -148,6 +148,9 @@ const RoomDetails = () => {
                <div>
                   <div id="hotel-map" className='h-[400px] rounded-md mt-10'></div>
                </div>
+               {
+                  bookedUserEmail === user?.email && <PostReviews bookedUserEmail={bookedUserEmail} room_number={room_number}></PostReviews>
+               }
             </div> 
          </div>
          <div className="space-y-3">
@@ -181,7 +184,7 @@ const RoomDetails = () => {
                   <p className="text-lg font-medium">${price} <span className="text-base">/night</span></p>
                }
                <p className="text-base font-medium">Including 5% Taxes</p>
-               <p className="text-lg capitalize font-medium">{remainingRoom} rooms available</p>
+               <p className={`text-lg capitalize font-medium ${remainingRoom === 0 && 'text-red-500'}`}>{remainingRoom} rooms available</p>
             </div>
             <div className="space-y-3 py-5">
                <div className="border-gray-300 border py-2 px-3 rounded-md flex gap-3 items-center">
