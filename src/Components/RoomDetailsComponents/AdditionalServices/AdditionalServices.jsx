@@ -6,7 +6,6 @@ import launch from '../../../assets/launch.png'
 
 const AdditionalServices = ({total, setTotal}) => {
    const [isAdditionalService, setIsAdditionalService] = useState([])
-   console.log(isAdditionalService);
 
    return (
       <div className="flex flex-wrap gap-3">

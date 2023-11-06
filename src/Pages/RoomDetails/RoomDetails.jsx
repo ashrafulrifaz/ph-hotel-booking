@@ -15,30 +15,39 @@ import leftImg from '../../assets/less-than.png'
 import { AuthContext } from "../../Provider/Provider";
 import axios from "axios";
 import Swal from "sweetalert2";
-import moment from "moment/moment";
-
+import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker";
 
 
 const RoomDetails = () => {
    const {user} = useContext(AuthContext)
    const roomData = useLoaderData()
-   const {_id, images, title, description, rating, facilities, price} = roomData
+   const {_id, images, title, description, rating, facilities, price, room_number} = roomData
    const mapRef = useRef(null)
    const today = new Date().toISOString().slice(0, 10)
+   const [checkInDate, setCheckInDate] = useState(new Date());
+   const [checkOutDate, setCheckOutDate] = useState(new Date());
    const tomorrowDate = new Date()
    tomorrowDate.setDate(new Date ().getDate() + 1)
    const tomorrow = tomorrowDate.toISOString().slice(0, 10)
    const [total, setTotal] = useState(price)
    const navigate = useNavigate()
 
-   var now = moment();
-   console.log(now);
+   const [bookedDates, setBookedDates] = useState([])
    
    const offerPrice = Math.ceil(price - ((price / 100) * 20))
    const totalPrice = Math.ceil(price + ((price / 100) * 5))
-   console.log(totalPrice);
+   const disabledDate = [
+      bookedDates.map(dates => {
+         new Date(`${dates.checkIn}`)
+      })
+   ]
+   console.log(disabledDate);
 
    useEffect( () => {
+      axios.get(`http://localhost:5000/bookings/${room_number}`)
+         .then(res => setBookedDates(res.data))
+
       if(!mapRef.current){
          mapRef.current = L.map('hotel-map').setView([24.8949, 91.8687], 16);
          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mapRef.current);
@@ -48,16 +57,14 @@ const RoomDetails = () => {
             marker.bindPopup('Midnight Mirage Hotel').openPopup();
           });
       }      
-   },[])
+   },[room_number])
 
    const handleReservation = e => {
       e.preventDefault()
       const form = e.target;
-      const checkIn = form.checkIn.value
-      const checkOut = form.checkOut.value
       const rooms = form.rooms.value;
       const bookedItem = {
-         image: images[0], title, email: user.email, checkIn, checkOut, room_id: _id, price, rooms
+         image: images[0], title, email: user.email, checkIn: checkInDate, checkOut: checkOutDate, room_id: _id, price, rooms, room_number
       }
       axios.post("http://localhost:5000/bookings", bookedItem)
          .then(res => {
@@ -71,7 +78,6 @@ const RoomDetails = () => {
                })
             }
          })
-      console.log(bookedItem);
    }
 
    return (
@@ -170,15 +176,13 @@ const RoomDetails = () => {
                </div>
             </div>
             <form onSubmit={handleReservation} className="space-y-3 py-5">
-               <div className="flex gap-2">
-                  <div className="border-gray-300 border py-2 px-3 rounded-md">
-                     <label htmlFor="check-in" className="font-medium text-lg">Check In:</label>
-                     <input className="focus:outline-none" id="check-in" type="date" name="checkIn" defaultValue={today} required />
-                  </div>
-                  <div className="border-gray-300 border py-2 px-3 rounded-md">
-                     <label htmlFor="check-out" className="font-medium text-lg">Check Out:</label>
-                     <input className="focus:outline-none" id="check-out" type="date" name="checkOut" min={1} defaultValue={tomorrow} required />
-                  </div>
+               <div className="border-gray-300 border py-2 px-3 rounded-md flex gap-3 items-center">
+                  <label htmlFor="check-in" className="font-medium text-lg">Check In:</label>
+                  <DatePicker excludeDates={[disabledDate]} selected={checkInDate} onChange={(date) => setCheckInDate(date)} className="focus:outline-none" />
+               </div>
+               <div className="border-gray-300 border py-2 px-3 rounded-md flex gap-3 items-center">
+                  <label htmlFor="check-out" className="font-medium text-lg">Check Out:</label>
+                  <DatePicker excludeDates={[disabledDate]} selected={checkOutDate} onChange={(date) => setCheckOutDate(date)} className="focus:outline-none" />
                </div>
                <div className="py-2 px-3 border-gray-300 border rounded-md grid grid-cols-2 gap-5">
                   <label htmlFor="rooms">Number of Rooms</label>

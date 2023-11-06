@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
 
-const BookedItem = ({booking}) => {
+const BookedItem = ({booking, setBookings, bookings}) => {
    const {_id, image, title, checkIn, checkOut, price} = booking
 
    const checkInTime = moment(`${checkIn}`, 'YYYY-MM-DD')
@@ -28,11 +28,14 @@ const BookedItem = ({booking}) => {
                   .then(res => {
                      if(res.data.deletedCount > 0) {
                         Swal.fire({
-                           title: "Deleted!",
-                           text: "Booking Canceled",
-                           icon: "success"
+                           position: "top-end",
+                           icon: "success",
+                           title: "Booking Canceled",
+                           showConfirmButton: false,
+                           timer: 1500
                         });
-   
+                        const remainingBookings = bookings.filter(book => book._id !== _id)
+                        setBookings(remainingBookings)
                      }
                   })
             }
@@ -63,7 +66,7 @@ const BookedItem = ({booking}) => {
                      <p className="text-xl font-semibold">Check In Date: <span className="font-medium text-lg">{checkIn}</span></p>
                   </div>
                   <div>
-                     <p className="text-xl font-semibold">Check In Date: <span className="font-medium text-lg">{checkOut}</span></p>
+                     <p className="text-xl font-semibold">Check Out Date: <span className="font-medium text-lg">{checkOut}</span></p>
                   </div>
                   <div>
                      <p className="text-xl font-semibold">Price: <span className="font-medium text-lg">${price}</span></p>
@@ -82,7 +85,9 @@ const BookedItem = ({booking}) => {
 };
 
 BookedItem.propTypes = {
-   booking: PropTypes.object
+   booking: PropTypes.object,
+   setBookings: PropTypes.object,
+   bookings: PropTypes.object
 }
 
 export default BookedItem;

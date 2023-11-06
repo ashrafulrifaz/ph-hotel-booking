@@ -6,7 +6,6 @@ import BookedItem from "./BookedItem";
 const MyBookings = () => {
    const [bookings, setBookings] = useState([])
    const {user} = useContext(AuthContext)
-   console.log(bookings);
    
    useEffect(() => {
       axios.get(`http://localhost:5000/bookings?email=${user?.email}`)
@@ -21,7 +20,7 @@ const MyBookings = () => {
                {
                   bookings.length > 0 ? 
                   bookings.map((booking, idx) =>
-                     <BookedItem key={idx} booking={booking}></BookedItem>
+                     <BookedItem key={idx} booking={booking} setBookings={setBookings} bookings={bookings}></BookedItem>
                   ) :
                   <p className="text-center my-3 text-xl font-medium">No bookings found</p>
                }

@@ -8,6 +8,7 @@ import SignIn from "../Pages/SignIn/SignIn";
 import SignUp from "../Pages/SignUp/SignUp";
 import MyBookings from "../Pages/MyBookings/MyBookings";
 import PrivateRoute from "./PrivateRoute";
+import About from "../Pages/About/About";
 
 const Router = createBrowserRouter([
    {
@@ -40,6 +41,10 @@ const Router = createBrowserRouter([
          {
             path: '/my-bookings',
             element: <PrivateRoute><MyBookings></MyBookings></PrivateRoute>
+         },
+         {
+            path: '/about',
+            element: <About></About>
          }
       ]
    }
