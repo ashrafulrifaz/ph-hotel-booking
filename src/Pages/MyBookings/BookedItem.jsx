@@ -1,15 +1,50 @@
 import axios from "axios";
+import moment from "moment";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 
 const BookedItem = ({booking}) => {
    const {_id, image, title, checkIn, checkOut, price} = booking
 
+   const checkInTime = moment(`${checkIn}`, 'YYYY-MM-DD')
+   const todayTime = moment().format('YYYY-MM-DD'); 
+   const timeRemaining = checkInTime.diff(todayTime, 'days')
+
    const handleDeleteItem = (id) => {
-      axios.delete(`http://localhost:5000/bookings/${id}`)
-         .then(res => {
-            console.log(res.data);
-         })
+      if(timeRemaining >= 1) {
+         Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Cancel it!"
+         }).then((result) => {
+            if (result.isConfirmed) {
+               axios.delete(`http://localhost:5000/bookings/${id}`)
+                  .then(res => {
+                     if(res.data.deletedCount > 0) {
+                        Swal.fire({
+                           title: "Deleted!",
+                           text: "Booking Canceled",
+                           icon: "success"
+                        });
+   
+                     }
+                  })
+            }
+         });
+      } else {
+         Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: "You Can't Cancel This Booking",
+            showConfirmButton: false,
+            timer: 1500
+         });
+      }
    }
 
    return (

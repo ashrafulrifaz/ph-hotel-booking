@@ -34,3 +34,7 @@ html, body {
 #my_bookings li:last-child {
   border: none
 } 
+
+.swal2-cancel {
+  margin-top: 0!important
+}
