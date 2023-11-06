@@ -35,10 +35,13 @@ const RoomDetails = () => {
    
    const offerPrice = Math.ceil(price - ((price / 100) * 20))
    const totalPrice = Math.ceil(price + ((price / 100) * 5))
-   const disabledDates = [
-      new Date('bookedDates')
-      // Add more dates to this array as needed
-   ];
+   let disabledDates = [];
+
+   for (const bookedDate of bookedDates) {
+      disabledDates.push(new Date(bookedDate));
+   }
+
+   console.log(disabledDates);
 
    useEffect( () => {
       axios.get(`http://localhost:5000/bookings/${room_number}`)
