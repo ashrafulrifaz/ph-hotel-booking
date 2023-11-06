@@ -22,7 +22,7 @@ import DatePicker from "react-datepicker";
 const RoomDetails = () => {
    const {user} = useContext(AuthContext)
    const roomData = useLoaderData()
-   const {_id, images, title, description, rating, facilities, price, room_number, discount} = roomData
+   const {_id, images, title, description, rating, facilities, price, room_number, discount, quantity} = roomData
    const mapRef = useRef(null)
    const tomorrowDate = new Date()
    tomorrowDate.setDate(new Date ().getDate() + 1)
@@ -32,6 +32,9 @@ const RoomDetails = () => {
    const navigate = useNavigate()
 
    let [bookedDates, setBookedDates] = useState([])
+   const [bookedRoom, setBookedRoom] = useState(null)
+   const remainingRoom = quantity - bookedRoom
+   console.log('total', quantity, 'booked', bookedRoom, 'remaining', remainingRoom);
    
    const offerPrice = Math.ceil(price - ((price / 100) * 20))
    const totalPrice = Math.ceil(price + ((price / 100) * 5))
@@ -41,11 +44,10 @@ const RoomDetails = () => {
       disabledDates.push(new Date(bookedDate));
    }
 
-   console.log(disabledDates);
-
    useEffect( () => {
       axios.get(`http://localhost:5000/bookings/${room_number}`)
-         .then(res => {           
+         .then(res => {
+            setBookedRoom(res.data.length)      
             const newCheckInDate = res.data.map(date => date.checkIn.slice(0, 10))
             const newCheckOutDate = res.data.map(date => date.checkOut.slice(0, 10))
             const newDates = [...newCheckInDate, ...newCheckOutDate];
@@ -172,6 +174,7 @@ const RoomDetails = () => {
                <p className="text-lg font-medium mt-3 line-through decoration-2 decoration-red-600">${price} <span className="font-normal">/night</span></p>
                <p className="text-lg font-medium">${offerPrice} <span className="text-base">/night</span></p>
                <p className="text-base font-medium">Including 5% Taxes</p>
+               <p className="text-lg capitalize font-medium">{remainingRoom} rooms available</p>
             </div>
             <div className="space-y-3 py-5">
                <div className="border-gray-300 border py-2 px-3 rounded-md flex gap-3 items-center">
