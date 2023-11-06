@@ -29,18 +29,14 @@ const RoomDetails = () => {
    tomorrowDate.setDate(new Date ().getDate() + 1)
    const tomorrow = tomorrowDate.toISOString().slice(0, 10)
    const [total, setTotal] = useState(price)
-   const [checkInTime, setCheckInTime] = useState(null)
-   const [checkOutTime, setCheckOutTime] = useState(null)
-   const roomRef = useRef(1)
-   const checkInRef = useRef(null)
-   const checkOutRef = useRef(null)
    const navigate = useNavigate()
 
    var now = moment();
-   console.log(checkInTime, checkOutTime);
+   console.log(now);
    
    const offerPrice = Math.ceil(price - ((price / 100) * 20))
    const totalPrice = Math.ceil(price + ((price / 100) * 5))
+   console.log(totalPrice);
 
    useEffect( () => {
       if(!mapRef.current){
@@ -56,12 +52,12 @@ const RoomDetails = () => {
 
    const handleReservation = e => {
       e.preventDefault()
-      const checkIn = checkInRef.current.value
-      const checkOut = checkOutRef.current.value
-      const rooms = roomRef.current.value;
-      console.log(rooms);
+      const form = e.target;
+      const checkIn = form.checkIn.value
+      const checkOut = form.checkOut.value
+      const rooms = form.rooms.value;
       const bookedItem = {
-         title, email: user.email, checkIn, checkOut, room_id: _id, price, rooms
+         image: images[0], title, email: user.email, checkIn, checkOut, room_id: _id, price, rooms
       }
       axios.post("http://localhost:5000/bookings", bookedItem)
          .then(res => {
@@ -177,16 +173,16 @@ const RoomDetails = () => {
                <div className="flex gap-2">
                   <div className="border-gray-300 border py-2 px-3 rounded-md">
                      <label htmlFor="check-in" className="font-medium text-lg">Check In:</label>
-                     <input ref={checkInRef} className="focus:outline-none" id="check-in" type="date" name="checkIn" defaultValue={today} required />
+                     <input className="focus:outline-none" id="check-in" type="date" name="checkIn" defaultValue={today} required />
                   </div>
                   <div className="border-gray-300 border py-2 px-3 rounded-md">
-                     <label ref={checkOutRef} htmlFor="check-out" className="font-medium text-lg">Check Out:</label>
+                     <label htmlFor="check-out" className="font-medium text-lg">Check Out:</label>
                      <input className="focus:outline-none" id="check-out" type="date" name="checkOut" min={1} defaultValue={tomorrow} required />
                   </div>
                </div>
                <div className="py-2 px-3 border-gray-300 border rounded-md grid grid-cols-2 gap-5">
                   <label htmlFor="rooms">Number of Rooms</label>
-                  <input id="rooms" ref={roomRef} type="number" className="focus:outline-none border-s border-gray-500 px-5" defaultValue={1} />
+                  <input id="rooms" name="rooms" type="number" className="focus:outline-none border-s border-gray-500 px-5" defaultValue={1} />
                </div>
                {/* additional services */}
                <h3 className="text-xl font-semibold">Additional Services</h3>
@@ -208,8 +204,8 @@ const RoomDetails = () => {
                            </form>
                            <div className="space-y-3">
                               <h2 className="text-xl font-medium">{title}</h2>
-                              <h3 className="text-lg font-medium">Check In Date: <span className="font-normal">{today}</span></h3>
-                              <h3 className="text-lg font-medium">Check Out Date: <span className="font-normal">{tomorrow}</span></h3>
+                              <h3 className="text-lg font-medium">Check In Date: <span className="font-normal">4-11-2023</span></h3>
+                              <h3 className="text-lg font-medium">Check Out Date: <span className="font-normal">4-11-2023</span></h3>
                               <h3 className="text-lg font-medium">${total} <span className="text-base">total including taxes</span></h3>
                               <button className='capitalize font-medium bg-blue-700 text-white text-[15px] py-2 px-5 rounded-md hover:scale-95 transition-all mt-2'>Confirm Booking</button>
                            </div>

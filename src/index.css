@@ -30,3 +30,7 @@ html, body {
 #rooms #hotel-map {
   height: 250px
 }
+
+#my_bookings li:last-child {
+  border: none
+} 
