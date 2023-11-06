@@ -22,31 +22,33 @@ import DatePicker from "react-datepicker";
 const RoomDetails = () => {
    const {user} = useContext(AuthContext)
    const roomData = useLoaderData()
-   const {_id, images, title, description, rating, facilities, price, room_number} = roomData
+   const {_id, images, title, description, rating, facilities, price, room_number, discount} = roomData
    const mapRef = useRef(null)
    const tomorrowDate = new Date()
    tomorrowDate.setDate(new Date ().getDate() + 1)
    const [checkInDate, setCheckInDate] = useState(new Date());
    const [checkOutDate, setCheckOutDate] = useState(tomorrowDate);
-
-   console.log(typeof checkInDate.toString());
    // const [total, setTotal] = useState(price)
    const navigate = useNavigate()
 
-   const [bookedDates, setBookedDates] = useState([])
+   let [bookedDates, setBookedDates] = useState([])
    
    const offerPrice = Math.ceil(price - ((price / 100) * 20))
    const totalPrice = Math.ceil(price + ((price / 100) * 5))
    const disabledDates = [
-      new Date('2023-11-20'),
-      new Date('2023-11-25'),
-      new Date('2023-12-02'),
+      new Date('bookedDates')
       // Add more dates to this array as needed
-    ];
+   ];
 
    useEffect( () => {
       axios.get(`http://localhost:5000/bookings/${room_number}`)
-         .then(res => setBookedDates(res.data))
+         .then(res => {           
+            const newCheckInDate = res.data.map(date => date.checkIn.slice(0, 10))
+            const newCheckOutDate = res.data.map(date => date.checkOut.slice(0, 10))
+            const newDates = [...newCheckInDate, ...newCheckOutDate];
+
+            setBookedDates(newDates)
+         })
 
       if(!mapRef.current){
          mapRef.current = L.map('hotel-map').setView([24.8949, 91.8687], 16);
@@ -163,7 +165,7 @@ const RoomDetails = () => {
                <span>({rating})</span>
             </div>
             <div>
-               <p className="inline rounded-3xl py-2 px-4 bg-blue-600 text-white text-sm font-medium">{}% off</p>
+               <p className={`${discount !== undefined ? 'inline': 'hidden'} rounded-3xl py-2 px-4 bg-blue-600 text-white text-sm font-medium`}>{discount}% off</p>
                <p className="text-lg font-medium mt-3 line-through decoration-2 decoration-red-600">${price} <span className="font-normal">/night</span></p>
                <p className="text-lg font-medium">${offerPrice} <span className="text-base">/night</span></p>
                <p className="text-base font-medium">Including 5% Taxes</p>
@@ -178,7 +180,7 @@ const RoomDetails = () => {
                   <DatePicker excludeDates={disabledDates} selected={checkOutDate} onChange={(date) => setCheckOutDate(date)} className="focus:outline-none" />
                </div>
                {/* additional services */}
-               <h3 className="text-xl font-semibold">Additional Services</h3>
+               {/* <h3 className="text-xl font-semibold">Additional Services</h3> */}
                  {
                   // <AdditionalServices total={total} setTotal={setTotal}></AdditionalServices>
                  }

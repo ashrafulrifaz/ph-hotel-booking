@@ -1,5 +1,6 @@
 import Footer from "../../Components/Footer/Footer";
 import Banner from "../../Components/HomeComponents/Banner/Banner";
+import Facilies from "../../Components/HomeComponents/Facilities/Facilies";
 import FeaturedRooms from "../../Components/HomeComponents/FeaturedRooms/FeaturedRooms";
 import HomeSearch from "../../Components/HomeComponents/HomeSearch/HomeSearch";
 import Map from "../../Components/HomeComponents/Map/Map";
@@ -18,6 +19,7 @@ const Home = () => {
             <HomeSearch></HomeSearch>
             <Offer></Offer>
             <FeaturedRooms></FeaturedRooms>
+            <Facilies></Facilies>
             <Review></Review>
             <Map></Map>
          </div>
