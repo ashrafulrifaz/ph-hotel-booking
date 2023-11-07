@@ -35,7 +35,7 @@ const SignIn = () => {
             Swal.fire({
             position: 'top-end',
             icon: 'success',
-            title: 'Login Successful',
+            title: 'Sign In Successful',
             showConfirmButton: false,
             timer: 3000
             })
@@ -52,7 +52,7 @@ const SignIn = () => {
             Swal.fire({
                position: 'top-end',
                icon: 'success',
-               title: 'Login Successfull',
+               title: 'Sign In Successfull',
                showConfirmButton: false,
                timer: 3000
             })

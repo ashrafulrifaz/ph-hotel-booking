@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
+import moment from "moment";
 
 // Components
 import { AuthContext } from "../../Provider/Provider";
@@ -26,8 +27,10 @@ const RoomDetails = () => {
    const {images, title, description, rating, facilities, price, room_number, discount, quantity} = roomData
 
    // Booking Time
-   const [checkInDate, setCheckInDate] = useState(null);
-   const [checkOutDate, setCheckOutDate] = useState(null);
+   const [checkInDate, setCheckInDate] = useState(new Date());
+   const tomorrow = new Date()
+   tomorrow.setDate(tomorrow.getDate() + 1);
+   const [checkOutDate, setCheckOutDate] = useState(tomorrow);
 
    // Room Quantity
    let [bookedDates, setBookedDates] = useState([])
@@ -38,10 +41,15 @@ const RoomDetails = () => {
    const [reviews, setReviews] = useState([])
    const reviewCount = reviews.length
    
-   let totalPrice = price   
+   // price calculation
    const offerPrice = Math.ceil(price - ((price / 100) * discount))
+   const checkInTime = moment(`${checkInDate.toISOString()}`, 'YYYY-MM-DD')
+   const checkOutTime =  moment(`${checkOutDate.toISOString()}`, 'YYYY-MM-DD')
+   const timeDuration = checkOutTime.diff(checkInTime, 'days')
+   let totalPrice = price * timeDuration
    if(discount !== undefined){
-      totalPrice = offerPrice
+      totalPrice = offerPrice * timeDuration
+      console.log(totalPrice);
    }
 
    // Room Unavailability
@@ -69,7 +77,7 @@ const RoomDetails = () => {
    },[room_number])
 
    return (
-      <div className="pt-5 pb-20 grid grid-cols-3 gap-10 max-w-[90%] xl:max-w-[1200px] mx-auto" id="room_details">
+      <div className="pt-5 pb-20 grid grid-cols-1 lg:grid-cols-3 gap-10 max-w-[90%] xl:max-w-[1200px] mx-auto" id="room_details">
          <div className="col-span-2">
             <div className="space-y-3">  
 
@@ -139,11 +147,11 @@ const RoomDetails = () => {
             <div className="space-y-3 py-5">
                <div className="border-gray-300 border py-2 px-3 rounded-md flex gap-3 items-center">
                   <label htmlFor="check-in" className="font-medium text-lg">Check In:</label>
-                  <DatePicker placeholderText="Select your check out date" excludeDates={disabledDates} selected={checkInDate} onChange={(date) => setCheckInDate(date)} className="focus:outline-none" />
+                  <DatePicker excludeDates={disabledDates} selected={checkInDate} onChange={(date) => setCheckInDate(date)} minDate={checkInDate} selectsStart startDate={checkInDate} endDate={checkOutDate} className="focus:outline-none" />
                </div>
                <div className="border-gray-300 border py-2 px-3 rounded-md flex gap-3 items-center">
                   <label htmlFor="check-out" className="font-medium text-lg">Check Out:</label>
-                  <DatePicker placeholderText="Select your check out date" excludeDates={disabledDates} selected={checkOutDate} onChange={(date) => setCheckOutDate(date)} className="focus:outline-none" />
+                  <DatePicker excludeDates={disabledDates} selected={checkOutDate} onChange={(date) => setCheckOutDate(date)} minDate={checkInDate} selectsEnd startDate={checkInDate} endDate={checkOutDate} className="focus:outline-none" />
                </div>
                <div className="flex justify-between items-center">
                   <p className="text-lg font-medium">Total: ${totalPrice}</p>

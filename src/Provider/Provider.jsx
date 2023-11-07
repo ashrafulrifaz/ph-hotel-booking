@@ -33,7 +33,7 @@ const Provider = ({children}) => {
       }
    }, [user])
 
-   const createUser = (email, password) => {
+   const SignUpUser = (email, password) => {
       setLoading(true)
       return createUserWithEmailAndPassword(auth, email, password)
    }
@@ -52,7 +52,7 @@ const Provider = ({children}) => {
       return signOut(auth)
    }
 
-   const info = {user, createUser, signInUser, signOutUser, googleLogin, loading, rooms}
+   const info = {user, setUser, SignUpUser, signInUser, signOutUser, googleLogin, loading, rooms}
 
    return (
       <AuthContext.Provider value={info}>

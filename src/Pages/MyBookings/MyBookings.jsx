@@ -8,7 +8,7 @@ const MyBookings = () => {
    const {user} = useContext(AuthContext)
    
    useEffect(() => {
-      axios.get(`http://localhost:5000/bookings?email=${user?.email}`)
+      axios.get(`http://localhost:5000/bookings?email=${user?.email}`,{withCredentials:true})
          .then(res => setBookings(res.data))
    }, [user])
 

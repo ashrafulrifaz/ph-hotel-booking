@@ -5,17 +5,20 @@ import Swal from "sweetalert2";
 import Google from '../../assets/google.png'
 import eye from '../../assets/eye.png'
 import crossEye from '../../assets/crossed-eye.png'
-import { GoogleAuthProvider } from "firebase/auth";
+import { GoogleAuthProvider, updateProfile } from "firebase/auth";
+import auth from "../../firebase.init";
 
 const SignUp = () => {
    const [showPass, setShowPass] = useState(false)
-   const {signInUser, googleLogin} = useContext(AuthContext)
+   const {user, setUser, SignUpUser, googleLogin} = useContext(AuthContext)
    const navigate = useNavigate()
    const [erroMessage, setErroMessage] = useState('')
 
    const handleLogin = e => {
       e.preventDefault()
       const form = e.target;
+      const name = form.name.value;
+      const photo = form.photo.value;
       const email = form.email.value
       const password = form.password.value
 
@@ -29,16 +32,20 @@ const SignUp = () => {
          return
       }
 
-      signInUser(email, password)
+      SignUpUser(email, password)
          .then(() => {
+            navigate('/')
             Swal.fire({
             position: 'top-end',
             icon: 'success',
-            title: 'Login Successful',
+            title: 'Sign Up Successful',
             showConfirmButton: false,
             timer: 3000
             })
-            navigate('/')
+            updateProfile(auth.currentUser, {
+               displayName: name, photoURL: photo
+            })
+            setUser({...user, photoURL: photo})
          })
          .catch(error => setErroMessage(error.message))
    }
@@ -50,7 +57,7 @@ const SignUp = () => {
             Swal.fire({
                position: 'top-end',
                icon: 'success',
-               title: 'Login Successful',
+               title: 'Sign Up Successful',
                showConfirmButton: false,
                timer: 3000
             })
@@ -65,6 +72,14 @@ const SignUp = () => {
             <div className="w-full md:w-3/4 lg:w-1/2 mx-auto py-5 lg:py-10 px-5 lg:px-16 bg-white rounded-xl">
                <h2 className="text-2xl font-semibold text-center">Create an Account</h2>
                <form onSubmit={handleLogin} className="mt-10 space-y-4">
+                  <div>
+                     <label className="font-medium" htmlFor="name">Name</label>
+                     <input id="name" type="name" name="name" placeholder="Enter your name" className="w-full mt-2 border border-gray-300 py-2 px-3 rounded-lg focus:border-blue-400 focus:outline-none" />
+                  </div>
+                  <div>
+                     <label className="font-medium" htmlFor="photo">Photo</label>
+                     <input id="photo" type="text" name="photo" placeholder="Enter your photoURL" className="w-full mt-2 border border-gray-300 py-2 px-3 rounded-lg focus:border-blue-400 focus:outline-none" />
+                  </div>
                   <div>
                      <label className="font-medium" htmlFor="email">Email</label>
                      <input id="email" type="email" name="email" placeholder="Enter your email" className="w-full mt-2 border border-gray-300 py-2 px-3 rounded-lg focus:border-blue-400 focus:outline-none" />

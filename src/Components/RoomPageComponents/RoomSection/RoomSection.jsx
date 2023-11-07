@@ -21,8 +21,8 @@ const RoomSection = () => {
    }, [filter, rooms])
 
    return (
-      <div className="py-12 grid grid-cols-3 gap-10 max-w-[90%] xl:max-w-[1200px] mx-auto relative" id='rooms'>
-         <div className='border border-gray-300 rounded-md sticky h-[85vh] p-4'>
+      <div className="py-12 grid grid-cols-1 lg:grid-cols-3 gap-10 max-w-[90%] xl:max-w-[1200px] mx-auto relative" id='rooms'>
+         <div className='border border-gray-300 rounded-md sticky lg:h-[85vh] p-4'>
             <div className='flex justify-between items-center'>
                <h2 className='text-xl font-medium'>Display Room By:</h2>
                <div onClick={() => setFilter(!filter)}>
@@ -40,7 +40,9 @@ const RoomSection = () => {
                   }
                </div>
             </div>
-            <Map></Map>
+            <div className='hidden lg:block'>
+               <Map></Map>
+            </div>
          </div>
          <div className='col-span-2 space-y-5'>
             {

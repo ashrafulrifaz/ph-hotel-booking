@@ -47,21 +47,32 @@ html, body {
   margin-top: 0!important
 }
 
-.swiper-button-prev::after,
-.swiper-button-next::after {
-  padding: 9px 13px;
-  font-size: 15px!important;
-  font-weight:  700;
-  background: #1D4ED8;
-  color: white;
-  border-radius: 50%;
+.menu li > *:not(ul):not(.menu-title):not(details):active, .menu li > *:not(ul):not(.menu-title):not(details).active, .menu li > details > summary:active {
+  background-color: #fff!important;
 }
+
+#drawer_item {
+  padding: 8px 0px;
+  font-size: 16px;
+}
+
+#drawer_item:hover {
+  background-color: #fff!important;
+}
+
+#slider_image {
+  height: 300px
+}
+
+
 
 @media only screen and (min-width: 1024px) {
   #rooms #hotel-map {
     height: 250px
   }
-  
+  #slider_image {
+  height: 450px
+  }
   #room_details #hotel-map {
     height: 350px
   }

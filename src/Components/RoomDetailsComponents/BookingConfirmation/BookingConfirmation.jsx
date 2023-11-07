@@ -8,7 +8,6 @@ import Swal from 'sweetalert2';
 const BookingConfirmation = ({checkInDate, checkOutDate, remainingRoom, roomData, totalPrice}) => {
    const {user} = useContext(AuthContext)
    const {images, title, price, room_number} = roomData
-   console.log(roomData);
    const navigate = useNavigate()
 
    const handleNewBooking = () => {
@@ -31,7 +30,6 @@ const BookingConfirmation = ({checkInDate, checkOutDate, remainingRoom, roomData
          })
       }
    }
-   console.log(roomData);
 
    return (
       <div>
