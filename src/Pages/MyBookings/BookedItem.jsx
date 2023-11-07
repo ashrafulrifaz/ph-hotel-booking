@@ -53,26 +53,26 @@ const BookedItem = ({booking, setBookings, bookings}) => {
 
    return (
       <li className="border-b border-gray-200 p-5">
-         <div className="flex gap-8 items-center">
-            <div className="w-1/6">
-               <img className="w-48 h-auto rounded-md" src={image} alt="" />
+         <div className="flex flex-col md:flex-row gap-8 md:items-center">
+            <div className="w-full md:w-1/6">
+               <img className="w-48 h-[100%] rounded-md" src={image} alt="" />
             </div>
-            <div className="flex items-center justify-between w-5/6">
+            <div className="flex flex-col md:flex-row md:items-center justify-between w-5/6">
                <div>
                   <div>
-                     <h3 className="text-2xl font-medium">{title}</h3>
+                     <h3 className="text-xl lg:text-2xl font-semibold lg:font-medium">{title}</h3>
                   </div>
                   <div>
-                     <p className="text-lg font-semibold">Check In Date: <span className="font-medium text-base">{checkIn.slice(0, 10)}</span></p>
+                     <p className="text-base lg:text-lg font-semibold">Check In Date: <span className="font-medium text-base">{checkIn.slice(0, 10)}</span></p>
                   </div>
                   <div>
-                     <p className="text-lg font-semibold">Check Out Date: <span className="font-medium text-base">{checkOut.slice(0, 10)}</span></p>
+                     <p className="text-base lg:text-lg font-semibold">Check Out Date: <span className="font-medium text-base">{checkOut.slice(0, 10)}</span></p>
                   </div>
                   <div>
-                     <p className="text-lg font-semibold">Price: <span className="font-medium text-base">${price}</span></p>
+                     <p className="text-base lg:text-lg font-semibold">Price: <span className="font-medium text-base">${price}</span></p>
                   </div>
                </div>
-               <div className="flex gap-3">
+               <div className="flex gap-3 mt-4 md:mt-0">
                   <Link to={`/room/${_id}`}>
                      <button className="border py-1 px-2 rounded-md border-green-500 hover:bg-green-500 hover:text-white transition font-medium">Update Date</button>
                   </Link>

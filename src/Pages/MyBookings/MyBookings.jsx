@@ -15,7 +15,7 @@ const MyBookings = () => {
    return (
       <div className="py-10 max-w-[90%] xl:max-w-[1200px] mx-auto" id="my_bookings">
          <div>
-            <h2 className="text-2xl font-medium">Your Bookings</h2>
+            <h2 className="text-2xl font-semibold">Your Bookings</h2>
             <ul className="mt-5 border border-gray-300 rounded-md">
                {
                   bookings.length > 0 ? 
