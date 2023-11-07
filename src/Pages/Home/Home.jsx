@@ -15,7 +15,7 @@ const Home = () => {
       <div id="home">
          <Navbar></Navbar>
          <Banner></Banner>
-         <div className="max-w-[1200px] mx-auto">
+         <div className="max-w-[90%] xl:max-w-[1200px] mx-auto">
             <HomeSearch></HomeSearch>
             <Offer></Offer>
             <FeaturedRooms></FeaturedRooms>

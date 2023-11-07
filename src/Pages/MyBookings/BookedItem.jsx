@@ -63,13 +63,13 @@ const BookedItem = ({booking, setBookings, bookings}) => {
                      <h3 className="text-2xl font-medium">{title}</h3>
                   </div>
                   <div>
-                     <p className="text-xl font-semibold">Check In Date: <span className="font-medium text-lg">{checkIn.slice(0, 10)}</span></p>
+                     <p className="text-lg font-semibold">Check In Date: <span className="font-medium text-base">{checkIn.slice(0, 10)}</span></p>
                   </div>
                   <div>
-                     <p className="text-xl font-semibold">Check Out Date: <span className="font-medium text-lg">{checkOut.slice(0, 10)}</span></p>
+                     <p className="text-lg font-semibold">Check Out Date: <span className="font-medium text-base">{checkOut.slice(0, 10)}</span></p>
                   </div>
                   <div>
-                     <p className="text-xl font-semibold">Price: <span className="font-medium text-lg">${price}</span></p>
+                     <p className="text-lg font-semibold">Price: <span className="font-medium text-base">${price}</span></p>
                   </div>
                </div>
                <div className="flex gap-3">

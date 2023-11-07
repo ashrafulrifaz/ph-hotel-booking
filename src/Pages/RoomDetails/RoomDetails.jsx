@@ -69,7 +69,7 @@ const RoomDetails = () => {
    },[room_number])
 
    return (
-      <div className="pt-5 pb-20 grid grid-cols-3 gap-10 max-w-[1200px] mx-auto" id="room_details">
+      <div className="pt-5 pb-20 grid grid-cols-3 gap-10 max-w-[90%] xl:max-w-[1200px] mx-auto" id="room_details">
          <div className="col-span-2">
             <div className="space-y-3">  
 

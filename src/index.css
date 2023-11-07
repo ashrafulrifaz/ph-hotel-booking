@@ -5,8 +5,8 @@
 @tailwind utilities;
 
 html, body {
-  width: 100%;
-  overflow-x: hidden;
+  width: 100%!important;
+  overflow-x: hidden!important;
   font-family: 'Inter', sans-serif;
 }
 
@@ -25,6 +25,10 @@ html, body {
 #nav_item li .active {
   color: #1D4ED8;
   font-weight: 600
+}
+
+#hotel-map{
+  height: 300px
 }
 
 #rooms #hotel-map {
@@ -51,4 +55,17 @@ html, body {
   background: #1D4ED8;
   color: white;
   border-radius: 50%;
+}
+
+@media only screen and (min-width: 1024px) {
+  #rooms #hotel-map {
+    height: 250px
+  }
+  
+  #room_details #hotel-map {
+    height: 350px
+  }
+  #hotel-map{
+    height: 500px
+  }
 }

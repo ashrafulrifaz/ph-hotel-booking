@@ -12,7 +12,7 @@ const Navbar = () => {
 
    return (
       <div className="py-4 border-b-2 border-gray-200" id="navbar">
-         <div className="max-w-[1200px] mx-auto flex justify-between items-center">
+         <div className="max-w-[90%] xl:max-w-[1200px] mx-auto flex justify-between items-center">
             <div>
                <Link to="/">
                   <h2 className="font-semibold text-xl text-blue-700">Midnight Mirage Hotel</h2>

@@ -1,6 +1,7 @@
-// import { useRef, useState } from 'react';
-// import { Swiper, SwiperSlide } from 'swiper/react';
-// import { Parallax, Pagination, Navigation } from 'swiper/modules';
+import { useRef, useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Parallax, Pagination, Navigation } from 'swiper/modules';
+import bannerImg from '../../../assets/room-banner.jpg'
 
 // Import Swiper styles
 import 'swiper/css';
@@ -15,11 +16,11 @@ const Banner = () => {
 
    return (
       <div>
-         {/* <Swiper
-            style={{
-               '--swiper-navigation-color': '#fff',
-               '--swiper-pagination-color': '#fff',
-            }}
+         <Swiper
+            // style={{
+            //    '--swiper-navigation-color': '#fff',
+            //    '--swiper-pagination-color': '#fff',
+            // }}
             speed={600}
             parallax={true}
             pagination={{
@@ -33,7 +34,7 @@ const Banner = () => {
                slot="container-start"
                className="parallax-bg"
                style={{
-                  'background-image': 'url(https://i.ibb.co/7z4ZySB/63266581.jpg)',
+                  'background-image': `url('${bannerImg}')`,
                }}
                data-swiper-parallax="-23%"
             ></div>
@@ -94,7 +95,7 @@ const Banner = () => {
                   </p>
                </div>
             </SwiperSlide>
-         </Swiper> */}
+         </Swiper>
       </div>
    );
 };

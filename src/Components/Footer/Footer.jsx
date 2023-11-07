@@ -9,7 +9,7 @@ import upay from '../../assets/upay.png'
 const Footer = () => {
    return (
       <div className="py-10 border-t-2 border-gray-200">
-         <div className="max-w-[1200px] mx-auto grid grid-cols-4 gap-5 justify-between">
+         <div className="max-w-[90%] xl:max-w-[1200px] mx-auto grid grid-cols-4 gap-5 justify-between">
             <div className="space-y-3">
                <h2 className="font-semibold text-xl text-blue-700">Midnight Mirage Hotel</h2>
                <p className="text-lg">Your gateway to unforgettable stays is right here. Find, reserve, and enjoy the best hotels worldwide with us.</p>
