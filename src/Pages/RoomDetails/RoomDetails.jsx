@@ -40,6 +40,7 @@ const RoomDetails = () => {
 
    // review
    const [reviews, setReviews] = useState([])
+   const reviewCount = reviews.length
    
    let totalPrice = price   
    const offerPrice = Math.ceil(price - ((price / 100) * discount))
@@ -189,7 +190,7 @@ const RoomDetails = () => {
                   initialRating={rating}
                   readonly
                />
-               <span>({rating})</span>
+               <span className="font-medium">({reviewCount} Reviews)</span>
             </div>
             <div>
                <p className={`${discount !== undefined ? 'inline': 'hidden'} rounded-3xl py-2 px-4 bg-blue-600 text-white text-sm font-medium`}>{discount}% off</p>

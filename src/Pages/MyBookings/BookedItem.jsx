@@ -74,7 +74,7 @@ const BookedItem = ({booking, setBookings, bookings}) => {
                </div>
                <div className="flex gap-3">
                   <Link to={`/room/${_id}`}>
-                     <button className="border py-1 px-2 rounded-md border-green-500 hover:bg-green-500 hover:text-white transition font-medium">View</button>
+                     <button className="border py-1 px-2 rounded-md border-green-500 hover:bg-green-500 hover:text-white transition font-medium">Update Date</button>
                   </Link>
                   <button onClick={() => handleDeleteItem(_id)} className="border py-1 px-2 rounded-md border-red-500 transition hover:text-white hover:bg-red-500 font-medium">Delete</button>
                </div>
