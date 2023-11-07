@@ -18,6 +18,7 @@ import Slider from "../../Components/RoomDetailsComponents/Slider/Slider";
 import check from '../../assets/badge-check.png'
 import sizeImg from '../../assets/wide.png'
 import Map from "../../Components/HomeComponents/Map/Map";
+import { Helmet } from "react-helmet-async";
 
 
 const RoomDetails = () => {
@@ -77,91 +78,96 @@ const RoomDetails = () => {
    },[room_number])
 
    return (
-      <div className="pt-5 pb-20 grid grid-cols-1 lg:grid-cols-3 gap-10 max-w-[90%] xl:max-w-[1200px] mx-auto" id="room_details">
-         <div className="col-span-2">
-            <div className="space-y-3">  
+      <div>         
+         <Helmet>
+            <title>{title} - Midnight Mirage Hotel</title>
+         </Helmet>
+         <div className="pt-5 pb-20 grid grid-cols-1 lg:grid-cols-3 gap-10 max-w-[90%] xl:max-w-[1200px] mx-auto" id="room_details">
+            <div className="col-span-2">
+               <div className="space-y-3">  
 
-               {/* Slider */}
-               <Slider images={images}></Slider>  
-               <h2 className="text-3xl font-semibold">{title}</h2>
-               <p className="text-lg">{description}</p>
-               <div>
-                  {/* Room Info */}
-                  <div className="flex items-center gap-2">
-                     <img src={check} className="w-5" alt="" />
-                     <p className="text-[17px] text-green-400">Flexible cancelation</p>
-                  </div>
-                  <div className="flex items-center gap-2 mt-1">
-                     <img src={check} className="w-5" alt="" />
-                     <p className="text-[17px] text-green-400">Breakfast included</p>
-                  </div>
-                  <div className="flex gap-3 items-center mt-2">
-                     <img src={sizeImg} className="w-5" alt="" />
-                     <span className="text-lg font-medium">{'size'}</span>
-                  </div>
+                  {/* Slider */}
+                  <Slider images={images}></Slider>  
+                  <h2 className="text-3xl font-semibold">{title}</h2>
+                  <p className="text-lg">{description}</p>
+                  <div>
+                     {/* Room Info */}
+                     <div className="flex items-center gap-2">
+                        <img src={check} className="w-5" alt="" />
+                        <p className="text-[17px] text-green-400">Flexible cancelation</p>
+                     </div>
+                     <div className="flex items-center gap-2 mt-1">
+                        <img src={check} className="w-5" alt="" />
+                        <p className="text-[17px] text-green-400">Breakfast included</p>
+                     </div>
+                     <div className="flex gap-3 items-center mt-2">
+                        <img src={sizeImg} className="w-5" alt="" />
+                        <span className="text-lg font-medium">{'size'}</span>
+                     </div>
 
-                  {/* Room Facilites */}
-                  <h3 className="font-medium text-2xl mt-3">Room Facilities</h3>
-                  <div className="flex flex-wrap gap-5 mt-3">
-                     {
-                        facilities && facilities.map((facility, idx) => 
-                           <div key={idx} className="flex gap-3 items-center rounded-xl border border-gray-200 px-4 py-2">
-                              <img src={facility?.icon} className="w-8 h-8" alt="" />
-                              <p className="font-medium">{facility?.name}</p>
-                           </div>
-                        )
-                     }
+                     {/* Room Facilites */}
+                     <h3 className="font-medium text-2xl mt-3">Room Facilities</h3>
+                     <div className="flex flex-wrap gap-5 mt-3">
+                        {
+                           facilities && facilities.map((facility, idx) => 
+                              <div key={idx} className="flex gap-3 items-center rounded-xl border border-gray-200 px-4 py-2">
+                                 <img src={facility?.icon} className="w-8 h-8" alt="" />
+                                 <p className="font-medium">{facility?.name}</p>
+                              </div>
+                           )
+                        }
+                     </div>
                   </div>
+                  <div>
+                     {/* MAP */}
+                     <Map></Map>
+                  </div>
+                  {
+                     bookedUserEmail === user?.email && 
+                     <PostReviews bookedUserEmail={bookedUserEmail}></PostReviews>
+                  }
+               </div> 
+               <div className={`${reviews.length === 0 && "hidden"}`}>
+                  <h3 className="text-xl font-semibold">People{"'"}s Experiences</h3>
+                  {
+                     reviews.map((review, idx) => <ReviewsCard key={idx} review={review}></ReviewsCard>)
+                  }
+               </div>
+            </div>
+            <div className="space-y-3">
+               <div className="flex gap-2 items-center">
+                  <MyRating rating={rating}></MyRating>               
+                  <span className="font-medium">({reviewCount} Reviews)</span>
                </div>
                <div>
-                  {/* MAP */}
-                  <Map></Map>
+                  <p className={`${discount !== undefined ? 'inline': 'hidden'} rounded-3xl py-2 px-4 bg-blue-600 text-white text-sm font-medium`}>{discount}% off</p>
+                  <p className={`text-lg font-medium mt-3 line-through decoration-2 decoration-red-600 ${discount === undefined && 'hidden'}`}>${price} <span className="font-normal">/night</span></p>
+                  {
+                     discount !== undefined ? <p className="text-lg font-medium">${offerPrice} <span className="text-base">/night</span></p> :
+                     <p className="text-lg font-medium">${price} <span className="text-base">/night</span></p>
+                  }
+                  <p className="text-base font-medium">Including 5% Taxes</p>
+                  <p className={`text-lg capitalize font-medium ${remainingRoom === 0 && 'text-red-500'}`}>{remainingRoom} rooms available</p>
                </div>
-               {
-                  bookedUserEmail === user?.email && 
-                  <PostReviews bookedUserEmail={bookedUserEmail}></PostReviews>
-               }
-            </div> 
-            <div className={`${reviews.length === 0 && "hidden"}`}>
-               <h3 className="text-xl font-semibold">People{"'"}s Experiences</h3>
-               {
-                  reviews.map((review, idx) => <ReviewsCard key={idx} review={review}></ReviewsCard>)
-               }
-            </div>
-         </div>
-         <div className="space-y-3">
-            <div className="flex gap-2 items-center">
-               <MyRating rating={rating}></MyRating>               
-               <span className="font-medium">({reviewCount} Reviews)</span>
-            </div>
-            <div>
-               <p className={`${discount !== undefined ? 'inline': 'hidden'} rounded-3xl py-2 px-4 bg-blue-600 text-white text-sm font-medium`}>{discount}% off</p>
-               <p className={`text-lg font-medium mt-3 line-through decoration-2 decoration-red-600 ${discount === undefined && 'hidden'}`}>${price} <span className="font-normal">/night</span></p>
-               {
-                  discount !== undefined ? <p className="text-lg font-medium">${offerPrice} <span className="text-base">/night</span></p> :
-                  <p className="text-lg font-medium">${price} <span className="text-base">/night</span></p>
-               }
-               <p className="text-base font-medium">Including 5% Taxes</p>
-               <p className={`text-lg capitalize font-medium ${remainingRoom === 0 && 'text-red-500'}`}>{remainingRoom} rooms available</p>
-            </div>
-            <div className="space-y-3 py-5">
-               <div className="border-gray-300 border py-2 px-3 rounded-md flex gap-3 items-center">
-                  <label htmlFor="check-in" className="font-medium text-lg">Check In:</label>
-                  <DatePicker excludeDates={disabledDates} selected={checkInDate} onChange={(date) => setCheckInDate(date)} minDate={checkInDate} selectsStart startDate={checkInDate} endDate={checkOutDate} className="focus:outline-none" />
-               </div>
-               <div className="border-gray-300 border py-2 px-3 rounded-md flex gap-3 items-center">
-                  <label htmlFor="check-out" className="font-medium text-lg">Check Out:</label>
-                  <DatePicker excludeDates={disabledDates} selected={checkOutDate} onChange={(date) => setCheckOutDate(date)} minDate={checkInDate} selectsEnd startDate={checkInDate} endDate={checkOutDate} className="focus:outline-none" />
-               </div>
-               <div className="flex justify-between items-center">
-                  <p className="text-lg font-medium">Total: ${totalPrice}</p>
-                  <BookingConfirmation 
-                  checkInDate={checkInDate} 
-                  checkOutDate={checkOutDate}                  
-                  room_number={room_number} 
-                  remainingRoom={remainingRoom} 
-                  roomData={roomData}
-                  totalPrice={totalPrice}></BookingConfirmation>
+               <div className="space-y-3 py-5">
+                  <div className="border-gray-300 border py-2 px-3 rounded-md flex gap-3 items-center">
+                     <label htmlFor="check-in" className="font-medium text-lg">Check In:</label>
+                     <DatePicker excludeDates={disabledDates} selected={checkInDate} onChange={(date) => setCheckInDate(date)} minDate={checkInDate} selectsStart startDate={checkInDate} endDate={checkOutDate} className="focus:outline-none" />
+                  </div>
+                  <div className="border-gray-300 border py-2 px-3 rounded-md flex gap-3 items-center">
+                     <label htmlFor="check-out" className="font-medium text-lg">Check Out:</label>
+                     <DatePicker excludeDates={disabledDates} selected={checkOutDate} onChange={(date) => setCheckOutDate(date)} minDate={checkInDate} selectsEnd startDate={checkInDate} endDate={checkOutDate} className="focus:outline-none" />
+                  </div>
+                  <div className="flex justify-between items-center">
+                     <p className="text-lg font-medium">Total: ${totalPrice}</p>
+                     <BookingConfirmation 
+                     checkInDate={checkInDate} 
+                     checkOutDate={checkOutDate}                  
+                     room_number={room_number} 
+                     remainingRoom={remainingRoom} 
+                     roomData={roomData}
+                     totalPrice={totalPrice}></BookingConfirmation>
+                  </div>
                </div>
             </div>
          </div>

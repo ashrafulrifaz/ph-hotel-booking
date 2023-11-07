@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import Footer from "../../Components/Footer/Footer";
 import Banner from "../../Components/HomeComponents/Banner/Banner";
 import Facilies from "../../Components/HomeComponents/Facilities/Facilies";
@@ -12,6 +13,9 @@ const Home = () => {
 
    return (
       <div id="home">
+         <Helmet>
+            <title>Midnight Mirage Hotel</title>
+         </Helmet>
          <Navbar></Navbar>
          <Banner></Banner>
          <div className="max-w-[90%] xl:max-w-[1200px] mx-auto">

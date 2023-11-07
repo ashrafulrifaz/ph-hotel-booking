@@ -7,6 +7,7 @@ import eye from '../../assets/eye.png'
 import crossEye from '../../assets/crossed-eye.png'
 import { GoogleAuthProvider, updateProfile } from "firebase/auth";
 import auth from "../../firebase.init";
+import { Helmet } from "react-helmet-async";
 
 const SignUp = () => {
    const [showPass, setShowPass] = useState(false)
@@ -68,6 +69,9 @@ const SignUp = () => {
 
    return (
       <div className="bg-blue-50">
+         <Helmet>
+            <title>Sign Up - Midnight Mirage Hotel</title>
+         </Helmet>
          <div className="py-8 md:py-10 lg:py-16 max-w-[90%] mx-auto lg:max-w-[85%]">
             <div className="w-full md:w-3/4 lg:w-1/2 mx-auto py-5 lg:py-10 px-5 lg:px-16 bg-white rounded-xl">
                <h2 className="text-2xl font-semibold text-center">Create an Account</h2>

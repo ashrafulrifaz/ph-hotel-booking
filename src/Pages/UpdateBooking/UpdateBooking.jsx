@@ -6,11 +6,12 @@ import DatePicker from "react-datepicker";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const UpdateBooking = () => {
    const roomData = useLoaderData()
    const {id} = useParams()
-   const {room_number, checkIn, checkOut, price} = roomData
+   const {room_number, checkIn, checkOut, price, title} = roomData
    const [checkInDate, setCheckInDate] = useState(new Date(checkIn.toString().slice(0, 10)));
    const [checkOutDate, setCheckOutDate] = useState(new Date(checkOut.toString().slice(0, 10)));
    let [bookedDates, setBookedDates] = useState([])
@@ -61,6 +62,9 @@ const UpdateBooking = () => {
 
    return (
       <div className="bg-[#EFF3FF]">
+         <Helmet>
+            <title>Update {title} - Midnight Mirage Hotel</title>
+         </Helmet>
          <div className="max-w-[1000px] mx-auto py-10 h-[88vh] grid grid-cols-2 gap-10 items-center">
             <div>
                <img src={updateDate} alt="" />

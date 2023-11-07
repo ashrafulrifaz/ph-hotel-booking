@@ -2,6 +2,7 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Provider/Provider";
 import BookedItem from "./BookedItem";
+import { Helmet } from "react-helmet-async";
 
 const MyBookings = () => {
    const [bookings, setBookings] = useState([])
@@ -13,7 +14,10 @@ const MyBookings = () => {
    }, [user])
 
    return (
-      <div className="py-10 max-w-[90%] xl:max-w-[1200px] mx-auto" id="my_bookings">
+      <div className="py-10 max-w-[90%] xl:max-w-[1200px] mx-auto" id="my_bookings">         
+         <Helmet>
+            <title>My Bookings - Midnight Mirage Hotel</title>
+         </Helmet>
          <div>
             <h2 className="text-2xl font-semibold">Your Bookings</h2>
             <ul className="mt-5 border border-gray-300 rounded-md">
