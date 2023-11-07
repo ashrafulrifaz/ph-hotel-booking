@@ -1,4 +1,4 @@
-// import Banner from "../../Components/RoomPageComponents/Banner/Banner";
+import Banner from "../../Components/RoomPageComponents/Banner/Banner";
 import { Helmet } from "react-helmet-async";
 import RoomSection from "../../Components/RoomPageComponents/RoomSection/RoomSection";
 
@@ -8,7 +8,7 @@ const Rooms = () => {
          <Helmet>
             <title>Rooms - Midnight Mirage Hotel</title>
          </Helmet>
-         {/* <Banner></Banner> */}
+         <Banner></Banner>
          <RoomSection></RoomSection>
       </div>
    );

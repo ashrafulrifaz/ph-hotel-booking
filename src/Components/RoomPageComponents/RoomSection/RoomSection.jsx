@@ -4,13 +4,18 @@ import RoomPageCard from '../RoomPageCard/RoomPageCard';
 import Map from '../../HomeComponents/Map/Map';
 import upFilter from '../../../assets/up-arrow.gif'
 import downFilter from '../../../assets/down-arrow.gif'
+import { Link } from 'react-router-dom';
 
 const RoomSection = () => {
    const {rooms} = useContext(AuthContext)
    const [filteredRooms, setFilteredRooms] = useState([])
    const [filter, setFilter] = useState(false)
+   const [galleryItems, setGalleryItems] = useState([])
    
    useEffect(() => {
+      const galleryItem = rooms.map(room => ({image: room.images[0], id: room._id}))
+      setGalleryItems(galleryItem)
+
       if(!filter) {
          const shortRooms = rooms.slice().sort((a, b) => a.price - b.price)
          setFilteredRooms(shortRooms);
@@ -18,7 +23,7 @@ const RoomSection = () => {
          const shortRooms = rooms.slice().sort((a, b) => b.price - a.price)
          setFilteredRooms(shortRooms);
       }
-   }, [filter, rooms])
+   }, [filter, rooms, galleryItems])
 
    return (
       <div className="py-12 grid grid-cols-1 lg:grid-cols-3 gap-10 max-w-[90%] xl:max-w-[1200px] mx-auto relative" id='rooms'>
@@ -39,6 +44,15 @@ const RoomSection = () => {
                      </a>
                   }
                </div>
+            </div>
+            <div className='grid grid-cols-2 gap-3 mt-5'>
+               {
+                  galleryItems.map((item, idx) => 
+                     <Link to={`/rooms/${item.id}`} key={idx} className='cursor-pointer'>
+                        <img src={item.image} className='rounded-md' alt="image" />
+                     </Link>
+                  )
+               }
             </div>
             <div className='hidden lg:block'>
                <Map></Map>
