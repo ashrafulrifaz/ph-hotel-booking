@@ -31,10 +31,24 @@ html, body {
   height: 250px
 }
 
+#room_details #hotel-map {
+  height: 350px
+}
+
 #my_bookings li:last-child {
   border: none
 } 
 
 .swal2-cancel {
   margin-top: 0!important
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  padding: 9px 13px;
+  font-size: 15px!important;
+  font-weight:  700;
+  background: #1D4ED8;
+  color: white;
+  border-radius: 50%;
 }
