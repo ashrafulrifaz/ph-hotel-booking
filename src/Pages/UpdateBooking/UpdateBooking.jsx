@@ -65,24 +65,24 @@ const UpdateBooking = () => {
          <Helmet>
             <title>Update {title} - Midnight Mirage Hotel</title>
          </Helmet>
-         <div className="max-w-[1000px] mx-auto py-10 h-[88vh] grid grid-cols-2 gap-10 items-center">
-            <div>
+         <div className="max-w-[90%] lg:max-w-[1000px] mx-auto py-10 h-[88vh] grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div className="hidden lg:block">
                <img src={updateDate} alt="" />
             </div>
             <div>
-               <div className="w-full p-6 bg-white drop-shadow-xl rounded-lg">
+               <div className="w-full md:w-3/4 lg:w-full p-6 bg-white drop-shadow-xl rounded-lg mx-auto text-center md:text-left">
                   <h2 className="text-xl font-semibold">Update Your Booking Info</h2>
-                  <div className="grid grid-cols-2 gap-3 mt-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-6">
                      <div className="">
-                        <label htmlFor="check-in" className="font-medium text-lg">Check In</label>
+                        <label htmlFor="check-in" className="font-medium text-lg block">Check In</label>
                         <DatePicker excludeDates={disabledDates} selected={checkInDate} onChange={(date) => setCheckInDate(date)} className="focus:outline-none bg-gray-100 py-2 px-4 rounded-md mt-1 w-11/12" />
                      </div>
                      <div className="">
-                        <label htmlFor="check-in" className="font-medium text-lg">Check Out</label>
+                        <label htmlFor="check-in" className="font-medium text-lg block">Check Out</label>
                         <DatePicker excludeDates={disabledDates} selected={checkOutDate} onChange={(date) => setCheckOutDate(date)} className="focus:outline-none bg-gray-100 py-2 px-4 rounded-md mt-1 w-11/12" />
                      </div>
                   </div>
-                  <div className="mt-4 flex items-center gap-2">
+                  <div className="mt-4 flex items-center gap-2 justify-center">
                      <p className="text-lg font-semibold">Price</p>
                      <img src={arrowImg} className="w-5" alt="" />
                      <p className="text-lg font-medium">${price}</p>

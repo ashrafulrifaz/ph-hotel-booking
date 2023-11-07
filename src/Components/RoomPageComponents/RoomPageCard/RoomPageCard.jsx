@@ -18,21 +18,21 @@ const RoomPageCard = ({room}) => {
 
    return (
       <div className="rounded-md border border-gray-300 p-5">
-         <div className="flex justify-between gap-5">
-            <div className="w-[30%] relative">
+         <div className="flex flex-col md:flex-row justify-between gap-5">
+            <div className="w-full md:w-[30%] relative">
                <img src={images[0]} className="w-full h-full rounded-md" alt="" />
                <p className={`${discount ? 'block' : 'hidden'} top-2 right-2 absolute bg-blue-600 rounded-md py-1 px-2 text-[15px] text-white font-medium`}>{discount}% off</p>
             </div>
-            <div className="w-[67%]">
-               <div className="flex items-center justify-between">
+            <div className="w-full md:w-[67%]">
+               <div className="flex flex-col md:flex-row md:items-center justify-between">
                   <h2 className="text-2xl font-semibold">{title}</h2>
-                  <div className={`flex gap-2 ${reviews.length === 0 && 'hidden'}`}>
+                  <div className={`flex gap-2 mt-2 md:mt-0 ${reviews.length === 0 && 'hidden'}`}>
                      <MyRating rating={rating}></MyRating>
                      <p className='font-medium'>{`(${reviews.length} Reviews)`}</p>
                   </div>
                </div>
                <p>{description}</p>
-               <div className="flex gap-4">
+               <div className="flex flex-wrap gap-1 md:gap-4">
                   {
                      facilities && facilities.map((facility, idx) => 
                         <div key={idx} className="flex gap-3 items-center my-2 flex-grow-0">

@@ -55,9 +55,9 @@ const BookedItem = ({booking, setBookings, bookings}) => {
       <li className="border-b border-gray-200 p-5">
          <div className="flex flex-col md:flex-row gap-8 md:items-center">
             <div className="w-full md:w-1/6">
-               <img className="w-48 h-[100%] rounded-md" src={image} alt="" />
+               <img className="w-full md:w-48 h-[100%] rounded-md" src={image} alt="" />
             </div>
-            <div className="flex flex-col md:flex-row md:items-center justify-between w-5/6">
+            <div className="flex flex-col md:flex-row md:items-center justify-between w-full md:w-5/6">
                <div>
                   <div>
                      <h3 className="text-xl lg:text-2xl font-semibold lg:font-medium">{title}</h3>
