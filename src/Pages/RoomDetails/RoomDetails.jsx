@@ -9,9 +9,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useContext, useEffect, useRef, useState } from "react";
 import check from '../../assets/badge-check.png'
-// import AdditionalServices from "../../Components/RoomDetailsComponents/AdditionalServices/AdditionalServices";
 import sizeImg from '../../assets/wide.png'
-// import leftImg from '../../assets/less-than.png'
 import { AuthContext } from "../../Provider/Provider";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -162,7 +160,7 @@ const RoomDetails = () => {
                   bookedUserEmail === user?.email && <PostReviews bookedUserEmail={bookedUserEmail} room_number={room_number}></PostReviews>
                }
             </div> 
-            <div>
+            <div className={`${reviews.length === 0 && "hidden"}`}>
                <h3 className="text-xl font-semibold">People{"'"}s Experiences</h3>
                {
                   reviews.map((review, idx) => <ReviewsCard key={idx} review={review}></ReviewsCard>)
@@ -211,11 +209,6 @@ const RoomDetails = () => {
                   <label htmlFor="check-out" className="font-medium text-lg">Check Out:</label>
                   <DatePicker placeholderText="Select your check out date" excludeDates={disabledDates} selected={checkOutDate} onChange={(date) => setCheckOutDate(date)} className="focus:outline-none" />
                </div>
-               {/* additional services */}
-               {/* <h3 className="text-xl font-semibold">Additional Services</h3> */}
-                 {
-                  // <AdditionalServices total={total} setTotal={setTotal}></AdditionalServices>
-                 }
                <div className="flex justify-between items-center">
                   <p className="text-lg font-medium">Total: ${totalPrice}</p>
                   <a className={`capitalize font-medium bg-blue-700 text-white text-[15px] py-2 px-5 rounded-md hover:scale-95 transition-all cursor-pointer ${((checkInDate === null && checkOutDate === null) || remainingRoom === 0) && 'pointer-events-none'}`} onClick={()=> {
