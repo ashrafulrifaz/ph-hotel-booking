@@ -1,17 +1,20 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import updateDate from '../../assets/update-date.jpg'
 import arrowImg from '../../assets/arrow-small-right.png'
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const UpdateBooking = () => {
    const roomData = useLoaderData()
+   const {id} = useParams()
    const {room_number, checkIn, checkOut, price} = roomData
    const [checkInDate, setCheckInDate] = useState(new Date(checkIn.toString().slice(0, 10)));
    const [checkOutDate, setCheckOutDate] = useState(new Date(checkOut.toString().slice(0, 10)));
    let [bookedDates, setBookedDates] = useState([])
+   const navigate = useNavigate()
 
    useEffect(() => {
       axios.get(`http://localhost:5000/bookings/${room_number}`)
@@ -29,6 +32,33 @@ const UpdateBooking = () => {
       disabledDates.push(new Date(bookedDate));
    }
 
+   const handleUpdateBooking = () => {
+      const updateInfo = {
+         checkIn: checkInDate.toISOString(), checkOut: checkOutDate.toISOString()
+      }
+      axios.put(`http://localhost:5000/user-bookings/${id}`, updateInfo)
+         .then(res => {
+            if(res.data.modifiedCount > 0) {
+               Swal.fire({
+                  position: 'top-end',
+                  icon: 'success',
+                  title: 'Booking Info Updated Successfull',
+                  showConfirmButton: false,
+                  timer: 3000
+               })
+               navigate('/my-bookings')
+            } else {
+               Swal.fire({
+                  position: 'top-end',
+                  icon: 'error',
+                  title: 'Everything Updated',
+                  showConfirmButton: false,
+                  timer: 3000
+               })
+            }
+         })
+   }
+
    return (
       <div className="bg-[#EFF3FF]">
          <div className="max-w-[1000px] mx-auto py-10 h-[88vh] grid grid-cols-2 gap-10 items-center">
@@ -36,7 +66,7 @@ const UpdateBooking = () => {
                <img src={updateDate} alt="" />
             </div>
             <div>
-               <form className="w-full p-6 bg-white drop-shadow-xl rounded-lg">
+               <div className="w-full p-6 bg-white drop-shadow-xl rounded-lg">
                   <h2 className="text-xl font-semibold">Update Your Booking Info</h2>
                   <div className="grid grid-cols-2 gap-3 mt-6">
                      <div className="">
@@ -53,8 +83,8 @@ const UpdateBooking = () => {
                      <img src={arrowImg} className="w-5" alt="" />
                      <p className="text-lg font-medium">${price}</p>
                   </div>
-                  <button className='capitalize font-medium bg-blue-700 text-white text-[15px] py-2 px-5 rounded-md hover:scale-95 transition-all mt-4'>Update</button>
-               </form>
+                  <button onClick={handleUpdateBooking} className='capitalize font-medium bg-blue-700 text-white text-[15px] py-2 px-5 rounded-md hover:scale-95 transition-all mt-4'>Update</button>
+               </div>
             </div>
          </div>
       </div>
