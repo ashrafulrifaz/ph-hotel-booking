@@ -1,8 +1,23 @@
-# React + Vite
+### **Question:** Write 3 project features
+**Answer:** Here are some things about my website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+   * Firebase authentication for client signin, signup
 
-Currently, two official plugins are available:
+   * JWT authentication for secure user bookings data
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+   * User can book room for a specific date
+
+   * User can update their booked room check-in date
+
+   * User can cancel their booked room before 1 day of check-in date
+
+   * There have aos animation whole website
+
+   * In this website, there has a map with out hotel location
+
+   * You can share your review for after booking a room
+
+   * In this website, there has a question page where you can see some of common question.
+
+
+  ### [Client Side Live Link:](https://hotel-booking-5f32b.web.app/)
