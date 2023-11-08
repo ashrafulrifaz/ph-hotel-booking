@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 const PostReviews = ({bookedUserEmail, room_number}) => {
    const {user} = useContext(AuthContext)
    const time = new Date().toLocaleString().slice(0, 10)
+   console.log(room_number);
 
    const handleNewReview = e => {
       e.preventDefault()

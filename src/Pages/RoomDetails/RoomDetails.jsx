@@ -28,10 +28,11 @@ const RoomDetails = () => {
    const {images, title, description, rating, facilities, price, room_number, discount, quantity, size} = roomData
 
    // Booking Time
-   const [checkInDate, setCheckInDate] = useState(new Date());
+   const [checkInDate, setCheckInDate] = useState(null);
+   const [checkOutDate, setCheckOutDate] = useState(null);
+   const today = new Date()
    const tomorrow = new Date()
    tomorrow.setDate(tomorrow.getDate() + 1);
-   const [checkOutDate, setCheckOutDate] = useState(tomorrow);
 
    // Room Quantity
    let [bookedDates, setBookedDates] = useState([])
@@ -44,12 +45,12 @@ const RoomDetails = () => {
    
    // price calculation
    const offerPrice = Math.ceil(price - ((price / 100) * discount))
-   const checkInTime = moment(`${checkInDate.toISOString()}`, 'YYYY-MM-DD')
-   const checkOutTime =  moment(`${checkOutDate.toISOString()}`, 'YYYY-MM-DD')
-   const timeDuration = checkOutTime.diff(checkInTime, 'days')
-   let totalPrice = price * timeDuration
+   const checkInTime = moment(`${checkInDate && checkInDate?.toISOString()}`, 'YYYY-MM-DD')
+   const checkOutTime =  moment(`${checkOutDate && checkOutDate?.toISOString()}`, 'YYYY-MM-DD')
+   const timeDuration = checkOutTime ? checkOutTime.diff(checkInTime, 'days') : price
+   let totalPrice = timeDuration ? price * timeDuration : price
    if(discount !== undefined){
-      totalPrice = offerPrice * timeDuration
+      totalPrice = timeDuration ? offerPrice * timeDuration : offerPrice
       console.log(totalPrice);
    }
 
@@ -124,7 +125,7 @@ const RoomDetails = () => {
                   </div>
                   {
                      bookedUserEmail === user?.email && 
-                     <PostReviews bookedUserEmail={bookedUserEmail}></PostReviews>
+                     <PostReviews bookedUserEmail={bookedUserEmail} room_number={room_number}></PostReviews>
                   }
                </div> 
                <div data-aos="fade-in" className={`${reviews.length === 0 && "hidden"}`}>
@@ -152,11 +153,11 @@ const RoomDetails = () => {
                <div className="space-y-3 py-5">
                   <div className="border-gray-300 border py-2 px-3 rounded-md flex gap-3 items-center">
                      <label htmlFor="check-in" className="font-medium text-lg">Check In:</label>
-                     <DatePicker excludeDates={disabledDates} selected={checkInDate} onChange={(date) => setCheckInDate(date)} minDate={checkInDate} selectsStart startDate={checkInDate} endDate={checkOutDate} className="focus:outline-none" />
+                     <DatePicker placeholderText="Click to select a date" excludeDates={disabledDates} selected={checkInDate} onChange={(date) => setCheckInDate(date)} minDate={checkInDate} selectsStart startDate={today} endDate={tomorrow} className="focus:outline-none" />
                   </div>
                   <div className="border-gray-300 border py-2 px-3 rounded-md flex gap-3 items-center">
                      <label htmlFor="check-out" className="font-medium text-lg">Check Out:</label>
-                     <DatePicker excludeDates={disabledDates} selected={checkOutDate} onChange={(date) => setCheckOutDate(date)} minDate={checkInDate} selectsEnd startDate={checkInDate} endDate={checkOutDate} className="focus:outline-none" />
+                     <DatePicker placeholderText="Click to select a date" excludeDates={disabledDates} selected={checkOutDate} onChange={(date) => setCheckOutDate(date)} minDate={checkInDate} selectsEnd startDate={today} endDate={tomorrow} className="focus:outline-none" />
                   </div>
                   <div className="flex justify-between items-center">
                      <p className="text-lg font-medium">Total: ${totalPrice}</p>
