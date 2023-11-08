@@ -67,10 +67,10 @@ const UpdateBooking = () => {
          </Helmet>
          <div className="max-w-[90%] lg:max-w-[1000px] mx-auto py-10 h-[88vh] grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <div className="hidden lg:block">
-               <img src={updateDate} alt="" />
+               <img data-aos="fade-in" src={updateDate} alt="" />
             </div>
             <div>
-               <div className="w-full md:w-3/4 lg:w-full p-6 bg-white drop-shadow-xl rounded-lg mx-auto text-center md:text-left">
+               <div data-aos="fade-up" className="w-full md:w-3/4 lg:w-full p-6 bg-white drop-shadow-xl rounded-lg mx-auto text-center md:text-left">
                   <h2 className="text-xl font-semibold">Update Your Booking Info</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-6">
                      <div className="">

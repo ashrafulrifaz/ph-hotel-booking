@@ -25,7 +25,7 @@ const RoomDetails = () => {
    const {user} = useContext(AuthContext)
    const [bookedUserEmail, setBookedUserEmail] = useState([])
    const roomData = useLoaderData()
-   const {images, title, description, rating, facilities, price, room_number, discount, quantity} = roomData
+   const {images, title, description, rating, facilities, price, room_number, discount, quantity, size} = roomData
 
    // Booking Time
    const [checkInDate, setCheckInDate] = useState(new Date());
@@ -102,7 +102,7 @@ const RoomDetails = () => {
                      </div>
                      <div className="flex gap-3 items-center mt-2">
                         <img src={sizeImg} className="w-5" alt="" />
-                        <span className="text-lg font-medium">{'size'}</span>
+                        <span className="text-lg font-medium">{size} ft²</span>
                      </div>
 
                      {/* Room Facilites */}
@@ -110,7 +110,7 @@ const RoomDetails = () => {
                      <div className="flex flex-wrap gap-5 mt-3">
                         {
                            facilities && facilities.map((facility, idx) => 
-                              <div key={idx} className="flex gap-3 items-center rounded-xl border border-gray-200 px-4 py-2">
+                              <div data-aos="zoom-in" key={idx} className="flex gap-3 items-center rounded-xl border border-gray-200 px-4 py-2">
                                  <img src={facility?.icon} className="w-8 h-8" alt="" />
                                  <p className="font-medium">{facility?.name}</p>
                               </div>
@@ -127,14 +127,14 @@ const RoomDetails = () => {
                      <PostReviews bookedUserEmail={bookedUserEmail}></PostReviews>
                   }
                </div> 
-               <div className={`${reviews.length === 0 && "hidden"}`}>
+               <div data-aos="fade-in" className={`${reviews.length === 0 && "hidden"}`}>
                   <h3 className="text-xl font-semibold">People{"'"}s Experiences</h3>
                   {
                      reviews.map((review, idx) => <ReviewsCard key={idx} review={review}></ReviewsCard>)
                   }
                </div>
             </div>
-            <div className="space-y-3">
+            <div data-aos="zoom-in" className="space-y-3">
                <div className="flex gap-2 items-center">
                   <MyRating rating={rating}></MyRating>               
                   <span className="font-medium">({reviewCount} Reviews)</span>

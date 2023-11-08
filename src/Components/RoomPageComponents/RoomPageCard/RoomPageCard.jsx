@@ -17,7 +17,7 @@ const RoomPageCard = ({room}) => {
    }, [room_number])
 
    return (
-      <div className="rounded-md border border-gray-300 p-5">
+      <div data-aos="fade-down" className="rounded-md border border-gray-300 p-5">
          <div className="flex flex-col md:flex-row justify-between gap-5">
             <div className="w-full md:w-[30%] relative">
                <img src={images[0]} className="w-full h-full rounded-md" alt="" />

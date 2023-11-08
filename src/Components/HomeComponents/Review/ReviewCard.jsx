@@ -7,7 +7,7 @@ const ReviewCard = ({data}) => {
    const {authorName, authorImage, review_text, rating} = data
 
    return (
-      <div className="py-8 px-5 md:p-5 rounded-xl border text-left hover:shadow-xl transition-shadow relative">
+      <div data-aos="zoom-in" className="py-8 px-5 md:p-5 rounded-xl border text-left hover:shadow-xl transition-shadow relative">
          <div className="flex gap-3 items-center">
             <div className="w-3/12 md:w-2/12">
                <img style={{width: '50px', height: '50px'}} src={authorImage} className="rounded-full" alt="user" />

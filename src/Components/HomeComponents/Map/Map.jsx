@@ -19,7 +19,7 @@ const Map = () => {
 
    return (
       <div className="py-5">
-         <div id="hotel-map" className='h-[500px] rounded-md'></div>
+         <div data-aos="zoom-out" id="hotel-map" className='h-[500px] rounded-md'></div>
       </div>
    );
 };

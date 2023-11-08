@@ -10,37 +10,37 @@ import bookImage from '../../../assets/book.png'
 const Facilies = () => {
    return (
       <div className="py-10">
-         <h2 className="text-2xl md:text-3xl font-semibold text-center">Our Facilities</h2>
+         <h2 data-aos="flip-left" className="text-2xl md:text-3xl font-semibold text-center">Our Facilities</h2>
          <div className="mt-10 flex justify-center flex-wrap gap-12">
-            <div className='text-center'>
+            <div data-aos="zoom-in" className='text-center'>
                <img src={gymImage} className='w-16 md:w-20 mx-auto' alt="image" />
                <p className='mt-2 font-medium text-lg'>Fitness Center</p>
             </div>
-            <div className='text-center'>
+            <div data-aos="zoom-in" className='text-center'>
                <img src={spaImage} className='w-16 md:w-20 mx-auto' alt="image" />
                <p className='mt-2 font-medium text-lg'>Spa & Wellness Center</p>
             </div>
-            <div className='text-center'>
+            <div data-aos="zoom-in" className='text-center'>
                <img src={poolImage} className='w-16 md:w-20 mx-auto' alt="image" />
                <p className='mt-2 font-medium text-lg'>Swimming Pool</p>
             </div>
-            <div className='text-center'>
+            <div data-aos="zoom-in" className='text-center'>
                <img src={cabImage} className='w-16 md:w-20 mx-auto' alt="image" />
                <p className='mt-2 font-medium text-lg'>Hotel Cab</p>
             </div>
-            <div className='text-center'>
+            <div data-aos="zoom-in" className='text-center'>
                <img src={resturantImage} className='w-16 md:w-20 mx-auto' alt="image" />
                <p className='mt-2 font-medium text-lg'>Resturant</p>
             </div>
-            <div className='text-center'>
+            <div data-aos="zoom-in" className='text-center'>
                <img src={barImage} className='w-16 md:w-20 mx-auto' alt="image" />
                <p className='mt-2 font-medium text-lg'>Bar and Lounge</p>
             </div>
-            <div className='text-center'>
+            <div data-aos="zoom-in" className='text-center'>
                <img src={rentImage} className='w-16 md:w-20 mx-auto' alt="image" />
                <p className='mt-2 font-medium text-lg'>Car Rental Services</p>
             </div>
-            <div className='text-center'>
+            <div data-aos="zoom-in" className='text-center'>
                <img src={bookImage} className='w-16 md:w-20 mx-auto' alt="image" />
                <p className='mt-2 font-medium text-lg'>Reading Lounge</p>
             </div>

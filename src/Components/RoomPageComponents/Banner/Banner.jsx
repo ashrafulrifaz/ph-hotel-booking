@@ -7,8 +7,8 @@ const Banner = () => {
       backgroundPosition: 'top center'
    }
    return (
-      <div style={roomBanner} className='h-[70vh] grid items-center justify-center'>
-         <h2 className='text-5xl font-semibold text-white'>Available Rooms</h2>
+      <div style={roomBanner} className='h-[75vh] grid items-center justify-center'>
+         <h2 data-aos="fade-down" className='text-5xl font-semibold text-white'>Available Rooms</h2>
       </div>
    );
 };

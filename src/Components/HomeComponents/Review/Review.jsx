@@ -22,7 +22,7 @@ const Review = () => {
 
    return (
       <div className="py-10" id='review'>
-         <h2 className='text-2xl md:text-3xl font-semibold'>What People Think About Us</h2>
+         <h2 data-aos="zoom-out" className='text-2xl md:text-3xl font-semibold'>What People Think About Us</h2>
          <div className='hidden lg:block'>
             <Swiper
                slidesPerView={3}

@@ -26,13 +26,13 @@ const RoomSection = () => {
    }, [filter, rooms, galleryItems])
 
    return (
-      <div className="py-12 grid grid-cols-1 lg:grid-cols-3 gap-0 lg:gap-10 max-w-[90%] xl:max-w-[1200px] mx-auto relative" id='rooms'>
+      <div className="py-16 grid grid-cols-1 lg:grid-cols-3 gap-0 lg:gap-10 max-w-[90%] xl:max-w-[1200px] mx-auto relative" id='rooms'>
          <div className='border border-gray-300 rounded-md lg:h-[110vh] p-4'>      
          <h3 className='text-xl font-semibold'>Room Gallery</h3>      
             <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-2 gap-3 mt-5'>
                {
                   galleryItems.map((item, idx) => 
-                     <Link to={`/rooms/${item.id}`} key={idx} className='cursor-pointer'>
+                     <Link data-aos="zoom-in" to={`/rooms/${item.id}`} key={idx} className='cursor-pointer'>
                         <img src={item.image} className='rounded-md' alt="image" />
                      </Link>
                   )

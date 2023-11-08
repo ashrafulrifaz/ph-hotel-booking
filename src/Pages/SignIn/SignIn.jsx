@@ -67,7 +67,7 @@ const SignIn = () => {
             <title>Sign In - Midnight Mirage Hotel</title>
          </Helmet>
          <div className="py-8 md:py-10 lg:py-16 max-w-[90%] mx-auto lg:max-w-[85%]">
-            <div className="w-full md:w-3/4 lg:w-1/2 mx-auto py-5 lg:py-10 px-5 lg:px-16 bg-white rounded-xl">
+            <div data-aos="fade-in" className="w-full md:w-3/4 lg:w-1/2 mx-auto py-5 lg:py-10 px-5 lg:px-16 bg-white rounded-xl">
                <h2 className="text-2xl font-semibold text-center">Sign In to Your Account</h2>
                <form onSubmit={handleSignIn} className="mt-10 space-y-4">
                   <div>

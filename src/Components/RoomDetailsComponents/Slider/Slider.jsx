@@ -7,7 +7,7 @@ import './slider.css';
 
 const Slider = ({images}) => {
    return (
-      <div>
+      <div data-aos="fade-in">
          <Swiper
             spaceBetween={30}
             autoplay={{

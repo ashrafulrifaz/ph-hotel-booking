@@ -21,19 +21,19 @@ const Navbar = () => {
             </div>
             <div>
                <ul className="gap-6 hidden lg:flex" id="nav_item">
-                  <li>
+                  <li data-aos="zoom-in">
                      <NavLink to="/" className="font-medium hover:text-blue-700">Home</NavLink>
                   </li>
-                  <li>
+                  <li data-aos="zoom-in">
                      <NavLink to="/rooms" className="font-medium hover:text-blue-700">Rooms</NavLink>
                   </li>
-                  <li>
+                  <li data-aos="zoom-in">
                      <NavLink to="/about" className="font-medium hover:text-blue-700">About</NavLink>
                   </li>
-                  <li>
+                  <li data-aos="zoom-in">
                      <NavLink to="/my-bookings" className="font-medium hover:text-blue-700">My Bookings</NavLink>
                   </li>
-                  <li>
+                  <li data-aos="zoom-in">
                      <NavLink to="/faq" className="font-medium hover:text-blue-700">FAQ</NavLink>
                   </li>
                </ul>

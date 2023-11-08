@@ -52,7 +52,7 @@ const BookedItem = ({booking, setBookings, bookings}) => {
    }
 
    return (
-      <li className="border-b border-gray-200 p-5">
+      <li data-aos="fade-in" className="border-b border-gray-200 p-5">
          <div className="flex flex-col md:flex-row gap-8 md:items-center">
             <div className="w-full md:w-1/6">
                <img className="w-full md:w-48 h-[100%] rounded-md" src={image} alt="" />
