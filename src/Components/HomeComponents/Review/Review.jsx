@@ -78,7 +78,7 @@ const Review = () => {
                pagination={{
                   clickable: true,
                }}
-               modules={[Pagination]}
+               modules={[Pagination, Autoplay]}
                className="mySwiper bg-white mt-5"
                >
                   {
