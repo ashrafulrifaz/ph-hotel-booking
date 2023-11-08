@@ -22,6 +22,14 @@ html, body {
   color: white
 }
 
+#home #normal_bar {
+  display: none
+}
+
+#home #home_bar {
+  display: block
+}
+
 #nav_item li .active {
   color: #1D4ED8;
   font-weight: 600
@@ -63,8 +71,6 @@ html, body {
 #slider_image {
   height: 300px
 }
-
-
 
 @media only screen and (min-width: 1024px) {
   #rooms #hotel-map {

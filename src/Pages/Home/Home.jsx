@@ -8,7 +8,6 @@ import Offer from "../../Components/HomeComponents/Offer/Offer";
 import Review from "../../Components/HomeComponents/Review/Review";
 import Navbar from "../../Components/Navbar/Navbar";
 
-
 const Home = () => {
 
    return (

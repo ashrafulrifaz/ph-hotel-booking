@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../Provider/Provider";
 import barImage from '../../assets/bars.png'
+import homeBarImage from '../../assets/bars-white.png'
 
 const Navbar = () => {
    const {user, signOutUser} = useContext(AuthContext)
@@ -49,7 +50,10 @@ const Navbar = () => {
                               user ?                               
                               <img src={user.photoURL} className="w-9 h-9 rounded-full cursor-pointer" alt="" />
                               :
-                              <img src={barImage} className="w-6 h-6 cursor-pointer" alt="" />
+                              <div>
+                                 <img src={homeBarImage} className="w-6 h-6 cursor-pointer hidden" alt="" id="home_bar" />
+                                 <img src={barImage} className="w-6 h-6 cursor-pointer" alt="" id="normal_bar" />
+                              </div>
                            }
                         </label>
                      </div> 
@@ -75,10 +79,10 @@ const Navbar = () => {
                                  <NavLink id="drawer_item" to="/faq" className="font-medium text-black hover:text-blue-700">FAQ</NavLink>
                               </li>
                               {
-                                 user ? <button onClick={handleLogOut} className='capitalize font-medium bg-blue-700 text-white text-[15px] py-2 px-5 rounded-md hover:scale-95 transition-all mt-2'>Log Out</button>
+                                 user ? <button onClick={handleLogOut} className='capitalize font-medium bg-blue-700 text-white text-[15px] py-2 px-5 rounded-md hover:scale-95 transition-all mt-2'>Sign Out</button>
                                  :
                                  <Link to="/signin">
-                                    <button className='capitalize font-medium bg-blue-700 text-white text-[15px] py-2 px-5 rounded-md hover:scale-95 transition-all mt-2 w-full'>Login</button>
+                                    <button className='capitalize font-medium bg-blue-700 text-white text-[15px] py-2 px-5 rounded-md hover:scale-95 transition-all mt-2 w-full'>Sign In</button>
                                  </Link>
                               }
                            </ul>
@@ -91,12 +95,12 @@ const Navbar = () => {
                      <span className="cursor-pointer relative hidden lg:block" onClick={() => setShowButton(!showButton)}>
                         <img src={user?.photoURL} className="w-9 h-9 rounded-full" alt="" />
                         <div className={`absolute w-32 right-0 border border-gray-300 rounded-xl shadow-xl py-4 px-3 bg-white ${showButton ? 'block' : 'hidden'}`}>                        
-                           <button onClick={handleLogOut} className='capitalize font-medium bg-blue-700 text-white text-[15px] py-2 px-5 rounded-md hover:scale-95 transition-all mt-2'>Log Out</button>
+                           <button onClick={handleLogOut} className='capitalize font-medium bg-blue-700 text-white text-[15px] py-2 px-5 rounded-md hover:scale-95 transition-all mt-2'>Sign Out</button>
                         </div>
                      </span>                   
                      :
                      <Link to="/signin">
-                        <button className='mt-3 capitalize font-medium bg-blue-700 text-white text-[15px] py-2 px-5 rounded-md hover:scale-95 transition-all'>Login</button>
+                        <button className='capitalize font-medium bg-blue-700 text-white text-[15px] py-2 px-5 rounded-md hover:scale-95 transition-all'>Sign In</button>
                      </Link>
                   }
                </div>

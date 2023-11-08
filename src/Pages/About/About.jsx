@@ -3,9 +3,7 @@ import aboutImage from '../../assets/about.jpg'
 import { Link } from "react-router-dom";
 import Facilies from "../../Components/HomeComponents/Facilities/Facilies";
 
-
-const About = () => {
-   
+const About = () => {  
 
    return (
      <div className="max-w-[90%] xl:max-w-[1200px] mx-auto pt-16 pb-0">

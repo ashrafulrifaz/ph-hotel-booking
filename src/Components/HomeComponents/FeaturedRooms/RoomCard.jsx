@@ -7,7 +7,7 @@ const RoomCard = ({room}) => {
 
    return (
       <div data-aos="zoom-out" className="relative">
-         <img src={images[0]} className="rounded-md rounded-b-none w-full h-auto" alt="room" />
+         <img src={images[0]} className="rounded-md rounded-b-none w-full h-48 lg:h-60" alt="room" />
          <div className="border border-gray-200 border-t-0 p-3 rounded-b-md space-y-2">
             <div className="flex items-center justify-between">
                <h3 className="text-xl font-semibold">{title}</h3>
