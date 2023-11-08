@@ -24,7 +24,7 @@ const BookedItem = ({booking, setBookings, bookings}) => {
             confirmButtonText: "Yes, Cancel it!"
          }).then((result) => {
             if (result.isConfirmed) {
-               axios.delete(`http://localhost:5000/bookings/${id}`)
+               axios.delete(`https://hotel-booking-server-side.vercel.app/bookings/${id}`)
                   .then(res => {
                      if(res.data.deletedCount > 0) {
                         Swal.fire({

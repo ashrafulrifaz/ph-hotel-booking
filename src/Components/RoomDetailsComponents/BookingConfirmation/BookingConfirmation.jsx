@@ -15,7 +15,7 @@ const BookingConfirmation = ({checkInDate, checkOutDate, remainingRoom, roomData
          image: images[0], title, email: user.email, checkIn: checkInDate, checkOut: checkOutDate, price, room_number
       }
       if(remainingRoom >= 1) {
-         axios.post("http://localhost:5000/bookings", bookedItem)
+         axios.post("https://hotel-booking-server-side.vercel.app/bookings", bookedItem)
          .then(res => {
             if(res.data.insertedId){
                navigate('/rooms')

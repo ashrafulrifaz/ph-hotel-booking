@@ -9,7 +9,7 @@ const MyBookings = () => {
    const {user} = useContext(AuthContext)
    
    useEffect(() => {
-      axios.get(`http://localhost:5000/bookings?email=${user?.email}`,{withCredentials:true})
+      axios.get(`https://hotel-booking-server-side.vercel.app/bookings?email=${user?.email}`,{withCredentials:true})
          .then(res => setBookings(res.data))
    }, [user])
 

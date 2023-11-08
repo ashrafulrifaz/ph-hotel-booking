@@ -12,7 +12,7 @@ const Provider = ({children}) => {
    const [loading, setLoading] = useState(true)
    
    useEffect(() => {
-      axios.get('http://localhost:5000/rooms')
+      axios.get('https://hotel-booking-server-side.vercel.app/rooms')
          .then(res => setRooms(res.data))
 
       const unsubscribe = onAuthStateChanged(auth, currentUser => {
@@ -21,10 +21,10 @@ const Provider = ({children}) => {
          const userEmail = currentUser?.email || user?.email         
          const loggedUser = {email: userEmail}
          if(currentUser){
-            axios.post('http://localhost:5000/jwt', loggedUser, {withCredentials: true})
+            axios.post('https://hotel-booking-server-side.vercel.app/jwt', loggedUser, {withCredentials: true})
             .then(res => console.log(res.data))
          } else {
-            axios.post('http://localhost:5000/logout', loggedUser, {withCredentials: true})
+            axios.post('https://hotel-booking-server-side.vercel.app/logout', loggedUser, {withCredentials: true})
             .then(res => console.log(res.data))
          }
       })

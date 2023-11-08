@@ -18,7 +18,7 @@ const UpdateBooking = () => {
    const navigate = useNavigate()
 
    useEffect(() => {
-      axios.get(`http://localhost:5000/bookings/${room_number}`)
+      axios.get(`https://hotel-booking-server-side.vercel.app/bookings/${room_number}`)
          .then(res => {    
             const newCheckInDate = res.data.map(date => date.checkIn.slice(0, 10))
             const newCheckOutDate = res.data.map(date => date.checkOut.slice(0, 10))
@@ -37,7 +37,7 @@ const UpdateBooking = () => {
       const updateInfo = {
          checkIn: checkInDate.toISOString(), checkOut: checkOutDate.toISOString()
       }
-      axios.put(`http://localhost:5000/user-bookings/${id}`, updateInfo)
+      axios.put(`https://hotel-booking-server-side.vercel.app/user-bookings/${id}`, updateInfo)
          .then(res => {
             if(res.data.modifiedCount > 0) {
                Swal.fire({

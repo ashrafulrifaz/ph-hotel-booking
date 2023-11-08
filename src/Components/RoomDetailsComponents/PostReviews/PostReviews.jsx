@@ -16,7 +16,7 @@ const PostReviews = ({bookedUserEmail, room_number}) => {
       const reviewData = {authorName: user?.displayName, authorImage: user?.photoURL, rating, review_text, email: bookedUserEmail, room_number, time}
       
       if(user?.email === bookedUserEmail) {
-         axios.post('http://localhost:5000/review', reviewData)
+         axios.post('https://hotel-booking-server-side.vercel.app/review', reviewData)
             .then(res => {
                if(res.data.insertedId){
                   Swal.fire({

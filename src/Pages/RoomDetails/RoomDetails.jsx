@@ -60,7 +60,7 @@ const RoomDetails = () => {
    }
 
    useEffect( () => {
-      axios.get(`http://localhost:5000/bookings/${room_number}`)
+      axios.get(`https://hotel-booking-server-side.vercel.app/bookings/${room_number}`)
          .then(res => {
             setBookedRoom(res.data.length)      
             const newCheckInDate = res.data.map(date => date.checkIn.slice(0, 10))
@@ -71,7 +71,7 @@ const RoomDetails = () => {
             res.data.map(mail => setBookedUserEmail(mail.email))
          })
 
-      axios.get(`http://localhost:5000/review/${room_number}`)
+      axios.get(`https://hotel-booking-server-side.vercel.app/review/${room_number}`)
          .then(res => {
             setReviews(res.data)
          })
