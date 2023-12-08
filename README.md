@@ -1,5 +1,6 @@
-### **Question:** Write 3 project features
-**Answer:** Here are some things about my website
+This is a hotel booking website of a hotel where a user can book a room of this hotel for a specific date if the room is available. User also can cancel her/him booking before 1day of checking and user can give feedback about our hotel from website.
+
+## Here are some Features about this website or project
 
    * Firebase authentication for client signin, signup
 
@@ -17,7 +18,37 @@
 
    * You can share your review for after booking a room
 
-   * In this website, there has a question page where you can see some of common question.
+   * In this website, there has a FAQ page where you can see some of common question.
+
+   * All information on the website, such as room details, room facilities, room images, reviews, etc., comes from the MongoDB database.
+
+## Technology used in this project
+
+   * HTML 
+
+   * CSS
+
+   * JavaScript
+
+   * Tailwindcss
+
+   * daisyUI
+
+   * React
+
+   * Firebase
+
+   * mongoDB
+
+   * axios for data fetching
+
+   * leaflet for map
+
+   * aos for animation
+
+   * react date picker for booking date selection
+
+   * swipper js for carousel slider
 
 
-  ### [Client Side Live Link:](https://hotel-booking-5f32b.web.app/)
+  ### [Client Side Live Link:](https://hotel-booking-5f32b.web.app/)  
