@@ -1,24 +1,24 @@
-This is a hotel booking website of a hotel where a user can book a room of this hotel for a specific date if the room is available. User also can cancel her/him booking before 1day of checking and user can give feedback about our hotel from website.
+This is a hotel booking website of a hotel where a user can book a room for a specific date if the room is available. Users also can cancel their booking before 1day after checking and users can give feedback about our hotel from the website.
 
-## Here are some Features about this website or project
+## Here are some Features of this website or project
 
-   * Firebase authentication for client signin, signup
+   * Firebase authentication for client sign in, signup
 
-   * JWT authentication for secure user bookings data
+   * JWT authentication for secure user booking data
 
    * User can book room for a specific date
 
    * User can update their booked room check-in date
 
-   * User can cancel their booked room before 1 day of check-in date
+   * User can cancel their booked room 1 day before the check-in date
 
-   * There have aos animation whole website
+   * There is AOS animation whole website
 
-   * In this website, there has a map with out hotel location
+   * On this website, there is a map with out hotel location
 
-   * You can share your review for after booking a room
+   * You can share your review after booking a room
 
-   * In this website, there has a FAQ page where you can see some of common question.
+   * On this website, there is a FAQ page where you can see some common questions.
 
    * All information on the website, such as room details, room facilities, room images, reviews, etc., comes from the MongoDB database.
 
@@ -38,17 +38,17 @@ This is a hotel booking website of a hotel where a user can book a room of this 
 
    * Firebase
 
-   * mongoDB
+   * MongoDB
 
-   * axios for data fetching
+   * Axios for data fetching
 
    * leaflet for map
 
-   * aos for animation
+   * AOS for animation
 
    * react date picker for booking date selection
 
    * swipper js for carousel slider
 
 
-  ### [Client Side Live Link:](https://hotel-booking-5f32b.web.app/)  
+  ### [Live Link:](https://hotel-booking-5f32b.web.app/)  
