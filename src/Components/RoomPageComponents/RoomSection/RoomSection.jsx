@@ -11,6 +11,16 @@ const RoomSection = () => {
    const [filteredRooms, setFilteredRooms] = useState([])
    const [filter, setFilter] = useState(false)
    const [galleryItems, setGalleryItems] = useState([])
+
+   // pagination
+   const [currentPage, setCurrentPage] = useState(0)
+   const roomPerPage = 3;
+   const lastRoomNum = roomPerPage * currentPage
+   const firstRoomNum = lastRoomNum - roomPerPage
+   const totalPage = Math.ceil(filteredRooms?.length / roomPerPage) || 0
+   const thisRooms = filteredRooms ? [...Array(totalPage).keys()] : []
+   
+
    
    useEffect(() => {
       const galleryItem = rooms.map(room => ({image: room.images[0], id: room._id}))
@@ -61,8 +71,26 @@ const RoomSection = () => {
             </div>
          </div>
             {
-               filteredRooms && filteredRooms.map((room, idx) => <RoomPageCard key={idx} room={room}></RoomPageCard>)
+               filteredRooms &&
+               filteredRooms?.length> 3 ? 
+               filteredRooms.map((room, idx) => <RoomPageCard key={idx} room={room}></RoomPageCard>).slice(firstRoomNum + 3, lastRoomNum + 3) 
+               : 
+               filteredRooms.map((room, idx) => <RoomPageCard key={idx} room={room}></RoomPageCard>)
             }
+            <div className="flex justify-center text-center gap-3 mt-5">
+               {
+                  filteredRooms?.length > 3 &&
+                  thisRooms.map(page => 
+                  <a
+                        className={`cursor-pointer px-3 rounded-md text-white ${currentPage === page ? 'bg-indigo-600' : 'bg-indigo-400'}`}
+                        onClick={() => {
+                           setCurrentPage(page)
+                        }}
+                        key={page}
+                  >{page + 1}</a>
+                  )
+               }
+            </div>
          </div>
       </div>
    );

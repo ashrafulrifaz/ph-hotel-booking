@@ -51,4 +51,4 @@ This is a hotel booking website of a hotel where a user can book a room of this 
    * swipper js for carousel slider
 
 
-  ### [Client Side Live Link:](https://hotel-booking-5f32b.web.app/)  
+  ### [Live Link:](https://hotel-booking-5f32b.web.app/)
